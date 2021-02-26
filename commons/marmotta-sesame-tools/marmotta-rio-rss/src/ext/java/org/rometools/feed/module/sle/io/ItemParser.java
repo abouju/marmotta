@@ -22,7 +22,11 @@ import com.sun.syndication.io.impl.DateParser;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.rometools.feed.module.sle.SleEntryImpl;
-import org.rometools.feed.module.sle.types.*;
+import org.rometools.feed.module.sle.types.DateValue;
+import org.rometools.feed.module.sle.types.EntryValue;
+import org.rometools.feed.module.sle.types.NumberValue;
+import org.rometools.feed.module.sle.types.Sort;
+import org.rometools.feed.module.sle.types.StringValue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

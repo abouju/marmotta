@@ -151,6 +151,9 @@ public class FloatUnit implements CloneableType {
 	if( f.getValue() != this.value ){
 	    return false;	    
 	}
-        return this.units == f.getUnits() || (this.units != null && this.units.equals(f.getUnits()));
+	if( this.units == f.getUnits() || ( this.units != null && this.units.equals( f.getUnits() )) ){
+	    return true;
+	}
+	return false;
     }
 }

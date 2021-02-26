@@ -17,12 +17,23 @@
 package com.sun.syndication.io.impl;
 
 import com.sun.syndication.feed.WireFeed;
-import com.sun.syndication.feed.atom.*;
+import com.sun.syndication.feed.atom.Category;
 import com.sun.syndication.feed.atom.Content;
+import com.sun.syndication.feed.atom.Entry;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Generator;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.feed.atom.Person;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.WireFeedInput;
 import com.sun.syndication.io.WireFeedOutput;
-import org.jdom2.*;
+import org.jdom2.Document; 
+import org.jdom2.Element;
+import org.jdom2.Namespace;
+import org.jdom2.Parent;
+import org.jdom2.JDOMException;
+import org.jdom2.Attribute;
+import org.jdom2.output.XMLOutputter; 
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 

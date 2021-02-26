@@ -375,8 +375,21 @@ public class KiWiValueFactory implements ValueFactory {
 
                     result = connection.loadLiteral(bvalue);
 
-                    if(result == null) {
-                        result= new KiWiBooleanLiteral(bvalue, rtype);
+                    if (result == null) {
+                        result = new KiWiBooleanLiteral(bvalue, rtype);
+                    }
+                } else if (isGeometry(value.toString()) || type.equals(Namespaces.NS_GEO + "wktLiteral")) {
+                    result = connection.loadLiteral(value.toString(), rtype);
+                    int sridvalue = 4326; //ESPG:4326 default SRID
+                    /*
+                     * Extract SRID  : default = http://www.opengis.net/def/crs/OGC/1.3/CRS84   
+                     */
+                    if (value.toString().contains("CRS84")) {
+                        sridvalue = 4326;
+                    }
+
+                    if (result == null) {
+                        result = new KiWiGeometryLiteral(value.toString(), rtype, sridvalue);
                     }
                 } else {
                     result = connection.loadLiteral(value.toString(), lang, rtype);
@@ -668,5 +681,16 @@ public class KiWiValueFactory implements ValueFactory {
 
     }
 
+    /**
+     *
+     * @param value
+     * @return
+     */
+    public boolean isGeometry(String value) {
+        if (value.contains("POINT") || value.contains("MULTIPOINT") || value.contains("LINESTRING") || value.contains("MULTILINESTRING") || value.contains("POLYGON") || value.contains("MULTIPOLYGON")) {
+            return true;
+        }
+        return false;
+    }
 
 }

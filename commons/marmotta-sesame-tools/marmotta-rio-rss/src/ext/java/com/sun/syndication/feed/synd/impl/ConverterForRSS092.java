@@ -16,15 +16,19 @@
  */
 package com.sun.syndication.feed.synd.impl;
 
-import com.sun.syndication.feed.rss.Category;
-import com.sun.syndication.feed.rss.Enclosure;
-import com.sun.syndication.feed.rss.Item;
-import com.sun.syndication.feed.synd.*;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.sun.syndication.feed.rss.Category;
+import com.sun.syndication.feed.rss.Enclosure;
+import com.sun.syndication.feed.rss.Item;
+import com.sun.syndication.feed.synd.SyndCategory;
+import com.sun.syndication.feed.synd.SyndCategoryImpl;
+import com.sun.syndication.feed.synd.SyndEnclosure;
+import com.sun.syndication.feed.synd.SyndEnclosureImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
 
 /**
  */

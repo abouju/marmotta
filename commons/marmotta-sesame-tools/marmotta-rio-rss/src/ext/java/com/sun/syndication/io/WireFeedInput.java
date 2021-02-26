@@ -23,12 +23,24 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.DOMBuilder;
 import org.jdom2.input.JDOMParseException;
-import org.xml.sax.*;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+import org.xml.sax.XMLReader;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+
+
+
 
 /**
  * Parses an XML document (File, InputStream, Reader, W3C SAX InputSource, W3C DOM Document or JDom DOcument)

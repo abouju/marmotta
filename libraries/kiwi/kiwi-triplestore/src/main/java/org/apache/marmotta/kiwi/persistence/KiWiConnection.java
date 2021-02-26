@@ -649,13 +649,80 @@ public class KiWiConnection implements AutoCloseable {
     }
 
     /**
-     * Load a literal with the date value given as argument if it exists. The method will first look in
-     * the node cache for cached nodes. If no cache entry is found, it will run a database query ("load.literal_by_tv")
-     * on the NODES table and construct a new KiWiLiteral using the values of the literal columns
-     * (svalue, ivalue, ...). The type of literal returned depends on the value of the ntype column.
+     * Load a literal based on the value, language and type passed as argument.
+     * The method will first look in the node cache for cached nodes. If no
+     * cache entry is found, it will run a database query ("load.literal_by_g")
+     * on the NODES table and construct a new KiWiLiteral using the values of
+     * the literal columns (svalue, ivalue, ...). The type of literal returned
+     * depends on the value of the ntype column.
      * <p/>
-     * When a node is loaded from the database, it will be added to the different caches to speed up
-     * subsequent requests.
+     * When a node is loaded from the database, it will be added to the
+     * different caches to speed up subsequent requests.
+     *
+     * @param isGeo only to diference: string literal from geo literal
+     * @param value string value of the geometry literal to load
+     * @param lang language of the literal to load (optional, 2-letter language
+     * code with optional country)
+     * @param ltype the type of the literal to load (optional)
+     * @return the literal matching the given arguments or null if it does not
+     * exist
+     * @throws SQLException
+     */
+    public KiWiLiteral loadLiteral(String value, KiWiUriResource ltype) throws SQLException {
+        // look in cache
+        final KiWiLiteral element = literalCache.get(LiteralCommons.createCacheKey(value, null, ltype));
+        if (element != null) {
+            return element;
+        }
+
+        requireJDBCConnection();
+
+        // ltype not persisted
+        if (ltype != null && ltype.getId() < 0) {
+            return null;
+        }
+
+        literalLock.lock();
+
+        try {
+            // otherwise prepare a query, depending on the parameters given
+            final PreparedStatement query;
+            if (ltype != null) {
+                query = getPreparedStatement("load.literal_by_gv");
+                query.setString(1, value);
+                query.setLong(2, ltype.getId());
+            } else {
+                // This cannot happen...
+                throw new IllegalArgumentException("Impossible combination of lang/type in loadLiteral!");
+            }
+
+            // run the database query and if it yields a result, construct a new node; the method call will take care of
+            // caching the constructed node for future calls
+            ResultSet result = query.executeQuery();
+            try {
+                if (result.next()) {
+                    return (KiWiLiteral) constructNodeFromDatabase(result);
+                } else {
+                    return null;
+                }
+            } finally {
+                result.close();
+            }
+        } finally {
+            literalLock.unlock();
+        }
+    }
+
+    /**
+     * Load a literal with the date value given as argument if it exists. The
+     * method will first look in the node cache for cached nodes. If no cache
+     * entry is found, it will run a database query ("load.literal_by_tv") on
+     * the NODES table and construct a new KiWiLiteral using the values of the
+     * literal columns (svalue, ivalue, ...). The type of literal returned
+     * depends on the value of the ntype column.
+     * <p/>
+     * When a node is loaded from the database, it will be added to the
+     * different caches to speed up subsequent requests.
      *
      * @param date the date of the date literal to load
      * @return a KiWiDateLiteral with the correct date, or null if it does not exist
@@ -957,6 +1024,63 @@ public class KiWiConnection implements AutoCloseable {
             else
                 throw new IllegalStateException("a boolean literal must have a datatype");
             insertNode.setTimestamp(5, new Timestamp(booleanLiteral.getCreated().getTime()), calendarUTC);
+
+            insertNode.executeUpdate();
+        } else if (node instanceof KiWiGeometryLiteral) {
+            KiWiGeometryLiteral geoLiteral = (KiWiGeometryLiteral) node;
+
+            String gvalue = "";
+	    String contentUpper = geoLiteral.getContent().toUpperCase​();
+
+            if (contentUpper.contains("MULTIPOINT")) {
+                gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("MULTIPOINT"));
+            } else {
+	     if (contentUpper.contains("POINT")) {
+                gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("POINT"));
+            } else {
+            if (contentUpper.contains("MULTILINESTRING")) {
+                gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("MULTILINESTRING"));
+            } else {
+            if (contentUpper.contains("LINESTRING")) {
+                gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("LINESTRING"));
+            } else {
+            if (contentUpper.contains("MULTIPOLYGON")) {
+                gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("MULTIPOLYGON"));
+            } else {
+	    if (contentUpper.contains("POLYGON")) 
+		{
+                  gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("POLYGON"));
+                }
+
+	    }// else MULTIPOLYGON
+            }// else LINESTRING
+            }// else MULTILINESTRING
+            }// else POINT
+            }// else MULTIPOINT
+
+            PreparedStatement insertNode = getPreparedStatement("store.gliteral");
+
+            insertNode.setLong(1, node.getId());
+            insertNode.setString(2, "Geometry Resource"); //FIXME
+
+            insertNode.setObject(3, null);
+
+            insertNode.setObject(4, null);
+
+            insertNode.setObject(5, null);
+
+            if (geoLiteral.getType() != null) {
+                insertNode.setLong(6, geoLiteral.getType().getId());
+            } else {
+                insertNode.setObject(6, null);
+            }
+            insertNode.setTimestamp(7, new Timestamp(geoLiteral.getCreated().getTime()), calendarUTC);
+
+            insertNode.setString(8, gvalue);
+
+            insertNode.setInt(9, geoLiteral.getSRID());
+	    
+	    System.out.println("insertNode ->"+insertNode);
 
             insertNode.executeUpdate();
         } else if (node instanceof KiWiStringLiteral) {
@@ -1679,8 +1803,8 @@ public class KiWiConnection implements AutoCloseable {
      * @return a KiWiNode
      */
     protected KiWiNode constructNodeFromDatabase(ResultSet row) throws SQLException {
-        // column order; id,ntype,svalue,ivalue,dvalue,tvalue,tzoffset,bvalue,lang,ltype,createdAt
-        //               1 ,2    ,3     ,4     ,5     ,6     ,7        ,8   ,9    ,10    .11
+        // column order; id,ntype,svalue,ivalue,dvalue,tvalue,tzoffset,bvalue,lang,ltype,createdAt, geom
+        //               1 ,2    ,3     ,4     ,5     ,6     ,7        ,8   ,9    ,10    .11       ,12
 
         long id = row.getLong(1);
 
@@ -1719,8 +1843,20 @@ public class KiWiConnection implements AutoCloseable {
 
             cacheNode(result);
             return result;
-        }
-        if("int".equals(ntype)) {
+        } else if ("geom".equals(ntype)) {
+            final KiWiGeometryLiteral result = new KiWiGeometryLiteral(row.getString(12), new Date(row.getTimestamp(11, calendarUTC).getTime()));
+            result.setId(id);
+
+            if (row.getString(9) != null) {
+                result.setLocale(getLocale(row.getString(9)));
+            }
+            if (row.getLong(10) != 0) {
+                result.setType((KiWiUriResource) loadNodeById(row.getLong(10)));
+            }
+
+            cacheNode(result);
+            return result;
+        } else if("int".equals(ntype)) {
             KiWiIntLiteral result = new KiWiIntLiteral(row.getLong(4), null, new Date(row.getTimestamp(11, calendarUTC).getTime()));
             result.setId(id);
             if(row.getLong(10) != 0) {
@@ -2047,7 +2183,7 @@ public class KiWiConnection implements AutoCloseable {
      * Return a collection of database tables contained in the database. This query is used for checking whether
      * the database needs to be created when initialising the system.
      *
-     * @return a Set containing te database tables
+     * @return a Set containing the database tables
      * @throws SQLException
      */
     public Set<String> getDatabaseTables() throws SQLException {

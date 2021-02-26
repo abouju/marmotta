@@ -18,7 +18,12 @@
 package org.apache.marmotta.ldpath.template.engine;
 
 import freemarker.core.Environment;
-import freemarker.template.*;
+import freemarker.template.TemplateDirectiveBody;
+import freemarker.template.TemplateDirectiveModel;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
+import freemarker.template.TemplateScalarModel;
 import org.apache.marmotta.ldpath.template.model.freemarker.TemplateWrapperModel;
 
 import java.io.IOException;

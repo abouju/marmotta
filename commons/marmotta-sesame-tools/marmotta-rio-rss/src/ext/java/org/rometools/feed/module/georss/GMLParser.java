@@ -19,7 +19,14 @@ package org.rometools.feed.module.georss;
 import com.sun.syndication.feed.module.Module;
 import com.sun.syndication.io.ModuleParser;
 import org.jdom2.Element;
-import org.rometools.feed.module.georss.geometries.*;
+import org.rometools.feed.module.georss.geometries.LineString;
+import org.rometools.feed.module.georss.geometries.LinearRing;
+import org.rometools.feed.module.georss.geometries.Point;
+import org.rometools.feed.module.georss.geometries.Polygon;
+import org.rometools.feed.module.georss.geometries.Envelope;
+import org.rometools.feed.module.georss.geometries.Position;
+import org.rometools.feed.module.georss.geometries.PositionList;
+
 
 import java.util.List;
 

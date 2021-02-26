@@ -27,7 +27,17 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.rometools.feed.module.mediarss.MediaEntryModule;
 import org.rometools.feed.module.mediarss.MediaModule;
-import org.rometools.feed.module.mediarss.types.*;
+import org.rometools.feed.module.mediarss.types.Category;
+import org.rometools.feed.module.mediarss.types.Credit;
+import org.rometools.feed.module.mediarss.types.MediaContent;
+import org.rometools.feed.module.mediarss.types.MediaGroup;
+import org.rometools.feed.module.mediarss.types.Metadata;
+import org.rometools.feed.module.mediarss.types.PlayerReference;
+import org.rometools.feed.module.mediarss.types.Rating;
+import org.rometools.feed.module.mediarss.types.Restriction;
+import org.rometools.feed.module.mediarss.types.Text;
+import org.rometools.feed.module.mediarss.types.Thumbnail;
+import org.rometools.feed.module.mediarss.types.UrlReference;
 
 import java.util.HashSet;
 import java.util.Set;

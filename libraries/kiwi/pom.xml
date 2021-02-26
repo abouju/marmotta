@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.apache.marmotta</groupId>
         <artifactId>marmotta-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
@@ -127,6 +127,7 @@
         <module>kiwi-versioning</module>
         <module>kiwi-reasoner</module>
         <module>kiwi-sparql</module>
+        <module>kiwi-geosparql</module>
         <module>kiwi-loader</module>
     </modules>
 

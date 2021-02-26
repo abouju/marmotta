@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.apache.marmotta</groupId>
         <artifactId>marmotta-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
@@ -29,10 +29,6 @@
 
     <name>Apache Marmotta: Maven Plugins</name>
     <description>Marmotta-specific maven plugins</description>
-
-    <properties>
-        <maven.version>3.1.1</maven.version>
-    </properties>
 
     <build>
         <plugins>
@@ -63,8 +59,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -96,13 +92,7 @@
                 <!-- Maven plugins do not have REST -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>restapi</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
+             </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -129,7 +119,7 @@
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-plugin-api</artifactId>
-                <version>${maven.version}</version>
+                <version>3.0.4</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven.plugin-tools</groupId>
@@ -140,12 +130,17 @@
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-core</artifactId>
-                <version>${maven.version}</version>
+                <version>3.0.4</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-model</artifactId>
-                <version>${maven.version}</version>
+                <version>3.0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-project</artifactId>
+                <version>2.2.1</version>
             </dependency>
             <dependency>
                 <!-- maven is using commons-logging -->

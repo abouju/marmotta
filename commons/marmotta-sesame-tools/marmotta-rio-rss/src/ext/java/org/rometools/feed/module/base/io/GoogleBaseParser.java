@@ -45,7 +45,16 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.rometools.feed.module.base.GoogleBase;
 import org.rometools.feed.module.base.GoogleBaseImpl;
-import org.rometools.feed.module.base.types.*;
+import org.rometools.feed.module.base.types.CurrencyEnumeration;
+import org.rometools.feed.module.base.types.DateTimeRange;
+import org.rometools.feed.module.base.types.FloatUnit;
+import org.rometools.feed.module.base.types.GenderEnumeration;
+import org.rometools.feed.module.base.types.IntUnit;
+import org.rometools.feed.module.base.types.PaymentTypeEnumeration;
+import org.rometools.feed.module.base.types.PriceTypeEnumeration;
+import org.rometools.feed.module.base.types.ShippingType;
+import org.rometools.feed.module.base.types.Size;
+import org.rometools.feed.module.base.types.YearType;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;

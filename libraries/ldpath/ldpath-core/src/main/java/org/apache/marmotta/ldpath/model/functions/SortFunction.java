@@ -24,7 +24,11 @@ import org.apache.marmotta.ldpath.model.transformers.DateTimeTransformer;
 import org.apache.marmotta.ldpath.model.transformers.StringTransformer;
 
 import java.text.Collator;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Allow sorting of the selection passed as first argument. Usage:

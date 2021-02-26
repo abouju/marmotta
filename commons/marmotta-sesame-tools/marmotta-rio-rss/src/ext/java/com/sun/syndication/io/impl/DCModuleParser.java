@@ -16,7 +16,11 @@
  */
 package com.sun.syndication.io.impl;
 
-import com.sun.syndication.feed.module.*;
+import com.sun.syndication.feed.module.DCModuleImpl;
+import com.sun.syndication.feed.module.DCSubjectImpl;
+import com.sun.syndication.feed.module.Module;
+import com.sun.syndication.feed.module.DCModule;
+import com.sun.syndication.feed.module.DCSubject;
 import com.sun.syndication.io.ModuleParser;
 import org.jdom2.Attribute;
 import org.jdom2.Element;

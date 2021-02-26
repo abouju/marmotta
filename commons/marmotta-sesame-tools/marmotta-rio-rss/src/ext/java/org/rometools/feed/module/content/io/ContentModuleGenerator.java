@@ -41,11 +41,19 @@
  */
 package org.rometools.feed.module.content.io;
 
-import org.jdom2.*;
+import org.jdom2.Attribute;
+import org.jdom2.CDATA;
+import org.jdom2.Content;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.rometools.feed.module.content.ContentItem;
 import org.rometools.feed.module.content.ContentModule;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @version $Revision: 1.2 $

@@ -35,7 +35,11 @@
  */
 package org.rometools.feed.module.yahooweather;
 
-import org.rometools.feed.module.yahooweather.types.*;
+import org.rometools.feed.module.yahooweather.types.Astronomy;
+import org.rometools.feed.module.yahooweather.types.Atmosphere;
+import org.rometools.feed.module.yahooweather.types.Location;
+import org.rometools.feed.module.yahooweather.types.Units;
+import org.rometools.feed.module.yahooweather.types.Wind;
 
 
 /**

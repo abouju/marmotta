@@ -35,14 +35,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.*;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
- * Add file description here!
+ * KiWi triple store Input/Output low-level operations
  *
  * @author Sebastian Schaffert (sschaffert@apache.org)
+ * @author Sergio Fernández (wikier@apache.org)
  */
 public class KiWiIO {
 
@@ -83,7 +86,7 @@ public class KiWiIO {
     public static final int MODE_PREFIX     = 2; // prefix compression for some known URI prefixes
     public static final int MODE_COMPRESSED = 3; // reserved: ZLIB string compression for long literals
 
-    private static final int LANG_UNKNOWN = 0;
+    public static final int LANG_UNKNOWN = 0;
     private static final int LANG_EN = 1;
     private static final int LANG_DE = 2;
     private static final int LANG_FR = 3;
@@ -104,6 +107,7 @@ public class KiWiIO {
 
 
     private static Map<Class<? extends KiWiNode>, Integer> classTable = new HashMap<>();
+    private static Map<Class<? extends KiWiNode>, KiWiIONode> ioTable = new HashMap<>();
     static {
         classTable.put(KiWiUriResource.class,    TYPE_URI);
         classTable.put(KiWiAnonResource.class,   TYPE_BNODE);
@@ -112,10 +116,33 @@ public class KiWiIO {
         classTable.put(KiWiDoubleLiteral.class,  TYPE_DOUBLE);
         classTable.put(KiWiIntLiteral.class,     TYPE_INT);
         classTable.put(KiWiStringLiteral.class,  TYPE_STRING);
+
+        loadExternalKiWiNodes();
     }
 
+    /**
+     * Dynamically loads definitions of KiWiNodes from external modules
+     *
+     */
+    private static void loadExternalKiWiNodes() {
+        final ServiceLoader<KiWiIONode> loader = ServiceLoader.load(KiWiIONode.class);
+        for (KiWiIONode impl : loader) {
+            //do not override the built-in nodes!
+            if (!classTable.containsKey(impl.getNodeClass())
+                    && !ioTable.containsKey(impl.getNodeClass())
+                    && !classTable.containsValue(impl.getType())) {
+                classTable.put(impl.getNodeClass(), impl.getType());
+                ioTable.put(impl.getNodeClass(), impl);
+                log.info("Registered new KiWi Node {} (implemented by {})",
+                        impl.getNodeClass(), impl.getClass());
+            } else {
+                log.warn("Ignored overwrite {} I/O operation with class {} (type={})",
+                        impl.getNodeClass(), impl.getClass(), impl.getType());
+            }
+        }
+    }
 
-    private static Map<String,Integer> langTable = new HashMap<>();
+    public static Map<String,Integer> langTable = new HashMap<>();
     static {
         langTable.put("en", LANG_EN);
         langTable.put("de", LANG_DE);
@@ -169,7 +196,12 @@ public class KiWiIO {
                     writeStringLiteral(output, (KiWiStringLiteral) node);
                     break;
                 default:
-                    throw new IllegalArgumentException("unknown KiWiNode type: "+node.getClass());
+                    if (ioTable.containsKey(node.getClass())) {
+                        final KiWiIONode kiWiIONode = ioTable.get(node.getClass());
+                        kiWiIONode.write(output, node);
+                    } else {
+                        throw new IllegalArgumentException("unknown KiWiNode type: " + node.getClass());
+                    }
             }
         }
     }
@@ -203,7 +235,19 @@ public class KiWiIO {
             case TYPE_STRING:
                 return readStringLiteral(input);
             default:
-                throw new IllegalArgumentException("unknown KiWiNode type: "+type);
+                if (classTable.containsValue(type)) {
+                    for (Map.Entry<Class<? extends KiWiNode>, Integer> entry : classTable.entrySet()) {
+                        if (Objects.equals(type, entry.getValue())) {
+                            final KiWiIONode kiWiIONode = ioTable.get(entry.getKey());
+                            return kiWiIONode.read(input);
+                        }
+                    }
+
+                    //should never arrive here...
+                    throw new IllegalArgumentException("unknown KiWiNode type: " + type);
+                } else {
+                    throw new IllegalArgumentException("unknown KiWiNode type: " + type);
+                }
         }
 
     }
@@ -784,7 +828,7 @@ public class KiWiIO {
      * @return
      * @throws IOException
      */
-    private static String readContent(DataInput in) throws IOException {
+    public static String readContent(DataInput in) throws IOException {
         int mode = in.readByte();
 
         if (mode != MODE_COMPRESSED) {
@@ -819,7 +863,7 @@ public class KiWiIO {
      * @param content  string to write
      * @throws IOException
      */
-    private static void writeContent(DataOutput out, String content) throws IOException {
+    public static void writeContent(DataOutput out, String content) throws IOException {
         if(content.length() > LITERAL_COMPRESS_LENGTH) {
             // temporary buffer of the size of bytes in the content string (assuming that the compressed data will fit into it)
             byte[] data   = content.getBytes("UTF-8");
@@ -852,4 +896,5 @@ public class KiWiIO {
             DataIO.writeString(out,content);
         }
     }
+
 }

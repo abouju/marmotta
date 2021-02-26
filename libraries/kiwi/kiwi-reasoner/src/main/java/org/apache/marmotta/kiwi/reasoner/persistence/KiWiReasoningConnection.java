@@ -110,7 +110,7 @@ public class KiWiReasoningConnection extends KiWiConnection {
 
             // load namespaces if they are not yet given
             if(namespaces == null) {
-                namespaces = new HashMap<>();
+                namespaces = new HashMap<String, String>();
                 PreparedStatement loadNamespaces = getPreparedStatement("namespaces.load_by_rule");
                 synchronized (loadNamespaces) {
                     loadNamespaces.setLong(1,ruleId);

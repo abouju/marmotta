@@ -18,9 +18,24 @@
 package com.sun.syndication.feed.synd.impl;
 
 import com.sun.syndication.feed.WireFeed;
-import com.sun.syndication.feed.atom.*;
+import com.sun.syndication.feed.atom.Content;
+import com.sun.syndication.feed.atom.Entry;
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.feed.atom.Person;
 import com.sun.syndication.feed.module.impl.ModuleUtils;
-import com.sun.syndication.feed.synd.*;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.Converter;
+import com.sun.syndication.feed.synd.SyndEnclosure;
+import com.sun.syndication.feed.synd.SyndEnclosureImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndLink;
+import com.sun.syndication.feed.synd.SyndLinkImpl;
+import com.sun.syndication.feed.synd.SyndPerson;
+import com.sun.syndication.feed.synd.SyndPersonImpl;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -40,7 +40,18 @@ package org.rometools.feed.module.base;
 
 import com.sun.syndication.feed.CopyFrom;
 import com.sun.syndication.feed.impl.EqualsBean;
-import org.rometools.feed.module.base.types.*;
+import org.rometools.feed.module.base.types.CloneableType;
+import org.rometools.feed.module.base.types.CurrencyEnumeration;
+import org.rometools.feed.module.base.types.DateTimeRange;
+import org.rometools.feed.module.base.types.FloatUnit;
+import org.rometools.feed.module.base.types.GenderEnumeration;
+import org.rometools.feed.module.base.types.IntUnit;
+import org.rometools.feed.module.base.types.PaymentTypeEnumeration;
+import org.rometools.feed.module.base.types.PriceTypeEnumeration;
+import org.rometools.feed.module.base.types.ShippingType;
+import org.rometools.feed.module.base.types.ShortDate;
+import org.rometools.feed.module.base.types.Size;
+import org.rometools.feed.module.base.types.YearType;
 
 import java.lang.reflect.Array;
 import java.net.URL;

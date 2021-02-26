@@ -20,7 +20,11 @@ package org.apache.marmotta.ldpath.model.functions.coll;
 
 import org.apache.marmotta.ldpath.api.backend.RDFBackend;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class FlattenFunction<Node> extends AbstractCollFunction<Node> {

@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.apache.marmotta</groupId>
         <artifactId>marmotta-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
@@ -263,7 +263,8 @@
                 <dependency>
                     <groupId>com.tinkerpop.blueprints</groupId>
                     <artifactId>blueprints-graph-sail</artifactId>
-                    <version>${blueprints.version}</version>
+                    <!-- TODO: create a shared blueprints version in marmotta-parent -->
+                    <version>2.6.0</version>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.hadoop</groupId>

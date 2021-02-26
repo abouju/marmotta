@@ -107,6 +107,8 @@ public class PGCopyUtilTest {
 
     @Test
     public void testWriteNodes() throws IOException, SQLException {
+        final int version = getDbVersion();
+
         KiWiConnection con = store.getPersistence().getConnection();
 
         PGCopyOutputStream out = new PGCopyOutputStream(PGCopyUtil.getWrappedConnection(con.getJDBCConnection()), "COPY nodes FROM STDIN (FORMAT csv)");
@@ -127,7 +129,7 @@ public class PGCopyUtilTest {
         }
 
         // flush out nodes
-        PGCopyUtil.flushNodes(nodes, out);
+        PGCopyUtil.flushNodes(nodes, out, version);
 
         out.close();
 
@@ -148,7 +150,18 @@ public class PGCopyUtilTest {
         log.info("checked {} nodes in {} ms", nodes.size(), System.currentTimeMillis()-imported);
     }
 
-
+    /**
+     * Return the schema version if necessary
+     *
+     * @return
+     * @throws SQLException
+     */
+    protected int getDbVersion() throws SQLException {
+        final KiWiConnection conn = store.getPersistence().getConnection();
+        final String version = conn.getMetadata("version");
+        conn.close();
+        return Integer.parseInt(version);
+    }
 
     /**
      * Return a random URI, with a 10% chance of returning a URI that has already been used.

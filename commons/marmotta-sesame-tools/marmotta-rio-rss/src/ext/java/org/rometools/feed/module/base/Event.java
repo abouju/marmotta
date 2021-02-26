@@ -39,7 +39,12 @@
  */
 package org.rometools.feed.module.base;
 
-import org.rometools.feed.module.base.types.*;
+import org.rometools.feed.module.base.types.CurrencyEnumeration;
+import org.rometools.feed.module.base.types.DateTimeRange;
+import org.rometools.feed.module.base.types.FloatUnit;
+import org.rometools.feed.module.base.types.PaymentTypeEnumeration;
+import org.rometools.feed.module.base.types.PriceTypeEnumeration;
+import org.rometools.feed.module.base.types.ShippingType;
 
 
 /**

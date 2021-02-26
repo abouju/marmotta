@@ -37,7 +37,13 @@ package org.rometools.feed.module.yahooweather;
 
 import com.sun.syndication.feed.CopyFrom;
 import com.sun.syndication.feed.module.ModuleImpl;
-import org.rometools.feed.module.yahooweather.types.*;
+import org.rometools.feed.module.yahooweather.types.Astronomy;
+import org.rometools.feed.module.yahooweather.types.Atmosphere;
+import org.rometools.feed.module.yahooweather.types.Condition;
+import org.rometools.feed.module.yahooweather.types.Forecast;
+import org.rometools.feed.module.yahooweather.types.Location;
+import org.rometools.feed.module.yahooweather.types.Units;
+import org.rometools.feed.module.yahooweather.types.Wind;
 
 
 /**

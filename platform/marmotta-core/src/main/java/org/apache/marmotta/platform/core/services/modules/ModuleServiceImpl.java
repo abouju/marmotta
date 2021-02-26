@@ -18,7 +18,11 @@
 package org.apache.marmotta.platform.core.services.modules;
 
 import com.google.common.collect.ImmutableList;
-import org.apache.commons.configuration.*;
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.marmotta.platform.core.api.modules.ModuleService;
 import org.apache.marmotta.platform.core.model.module.ModuleConfiguration;
 import org.slf4j.Logger;

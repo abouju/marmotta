@@ -60,6 +60,10 @@ public abstract class KiWiLiteral extends KiWiNode implements Literal {
         super(created);
     }
 
+   protected KiWiLiteral(KiWiUriResource type) {
+        this();
+        this.type = type;
+    }
 
     protected KiWiLiteral(Locale locale, KiWiUriResource type) {
         this();

@@ -21,6 +21,7 @@ import org.apache.marmotta.kiwi.config.KiWiConfiguration;
 import org.apache.marmotta.kiwi.loader.generic.KiWiHandler;
 import org.apache.marmotta.kiwi.loader.mysql.KiWiMySQLHandler;
 import org.apache.marmotta.kiwi.loader.pgsql.KiWiPostgresHandler;
+import org.apache.marmotta.kiwi.persistence.KiWiConnection;
 import org.apache.marmotta.kiwi.persistence.mysql.MySQLDialect;
 import org.apache.marmotta.kiwi.persistence.pgsql.PostgreSQLDialect;
 import org.apache.marmotta.kiwi.sail.KiWiStore;
@@ -172,6 +173,19 @@ public class KiWiHandlerTest {
             handler.shutdown();
         }
 
+    }
+
+    /**
+     * Return the schema version if necessary
+     *
+     * @return
+     * @throws SQLException
+     */
+    protected int getDbVersion() throws SQLException {
+        final KiWiConnection conn = store.getPersistence().getConnection();
+        final String version = conn.getMetadata("version");
+        conn.close();
+        return Integer.parseInt(version);
     }
 
 }

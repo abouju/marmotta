@@ -1,4 +1,4 @@
-/*
+/**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -30,14 +30,16 @@ import java.util.Set;
 /**
  * A dialect provides the SQL statements necessary to access the different types of database systems. Each
  * method should return a PreparedStatement that can be executed on the respective JDBC connection
- * <p/>
- * Author: Sebastian Schaffert
+ *
+ * @author: Sebastian Schaffert
+ *
+ * Version 5 is implemented by MARMOTTA-584
  */
 public abstract class KiWiDialect {
 
     private static Logger log = LoggerFactory.getLogger(KiWiDialect.class);
 
-    public final static int VERSION = 4;
+    public final static int VERSION = 5;
 
     private Properties statements;
 

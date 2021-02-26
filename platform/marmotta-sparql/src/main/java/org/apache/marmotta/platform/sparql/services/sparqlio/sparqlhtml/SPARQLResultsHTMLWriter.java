@@ -32,7 +32,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * SPARQL results to HTML writer using Freemarker

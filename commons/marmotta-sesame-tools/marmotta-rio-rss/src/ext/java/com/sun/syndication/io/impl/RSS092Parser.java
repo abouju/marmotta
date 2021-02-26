@@ -17,7 +17,13 @@
 package com.sun.syndication.io.impl;
 
 import com.sun.syndication.feed.WireFeed;
-import com.sun.syndication.feed.rss.*;
+import com.sun.syndication.feed.rss.Category;
+import com.sun.syndication.feed.rss.Channel;
+import com.sun.syndication.feed.rss.Cloud;
+import com.sun.syndication.feed.rss.Description;
+import com.sun.syndication.feed.rss.Enclosure;
+import com.sun.syndication.feed.rss.Item;
+import com.sun.syndication.feed.rss.Source;
 import org.jdom2.Element;
 
 import java.util.ArrayList;

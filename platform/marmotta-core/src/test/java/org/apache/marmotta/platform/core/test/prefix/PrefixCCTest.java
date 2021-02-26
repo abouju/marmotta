@@ -21,7 +21,10 @@ import java.util.Random;
 
 import org.apache.marmotta.platform.core.services.prefix.PrefixCC;
 import org.apache.marmotta.platform.core.test.base.EmbeddedMarmotta;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * Test the functionality of our prefix.cc implementation

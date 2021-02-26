@@ -34,7 +34,12 @@ import org.apache.marmotta.ldpath.parser.ParseException;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Main class providing query functionality for the different RDF backends.
