@@ -25,5 +25,5 @@ ASK {
     <http://en.wikipedia.org/wiki/Marmot> dct:title "Marmot" ;
                                           owl:sameAs <https://en.wikipedia.org/wiki/Marmot> ;
                                           rdf:type sioc-types:WikiArticle ;
-                                          sioc:topic <https://en.wikipedia.org/wiki/Category:Ground_squirrels> .
+                                          sioc:topic <https://en.wikipedia.org/wiki/Category:Marmots> .
 }

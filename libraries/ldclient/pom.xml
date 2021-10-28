@@ -108,7 +108,8 @@
         <module>ldclient-provider-phpbb</module>
         <module>ldclient-provider-facebook</module>
         <module>ldclient-provider-youtube</module>
-        <module>ldclient-provider-vimeo</module>
+        <!-- seems no more rdf data
+        <module>ldclient-provider-vimeo</module>-->
     </modules>
     
 </project>

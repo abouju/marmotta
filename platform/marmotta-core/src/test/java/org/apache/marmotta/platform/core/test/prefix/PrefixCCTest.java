@@ -23,8 +23,10 @@ import org.apache.marmotta.platform.core.services.prefix.PrefixCC;
 import org.apache.marmotta.platform.core.test.base.EmbeddedMarmotta;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Assume;
 
 /**
  * Test the functionality of our prefix.cc implementation
@@ -33,8 +35,8 @@ import org.junit.Test;
  */
 public class PrefixCCTest {
 
-    private static final String PREFIX = "sioc";
-	private static final String NAMESPACE = "http://rdfs.org/sioc/ns#";
+    	private static final String PREFIX = "org";
+	private static final String NAMESPACE = "http://www.w3.org/ns/org#";
 
 	private static EmbeddedMarmotta marmotta;
 	private static PrefixCC prefixcc;

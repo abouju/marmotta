@@ -34,7 +34,7 @@ public class TestVimeoProvider extends ProviderTestBase {
      */
     @Test
     public void testVideo() throws Exception {
-        testResource("http://vimeo.com/7223527", "vimeo-video.sparql");
+        testResource("https://vimeo.com/32001208", "vimeo-video.sparql");
     }
 
     /**
@@ -44,7 +44,7 @@ public class TestVimeoProvider extends ProviderTestBase {
      */
     @Test
     public void testChannel() throws Exception {
-        testResource("http://vimeo.com/channels/ninlive09", "vimeo-channel.sparql");
+        testResource("https://vimeo.com/channels/staffpicks", "vimeo-channel.sparql");
     }
 
 

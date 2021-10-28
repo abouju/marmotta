@@ -36,7 +36,7 @@ import org.openrdf.repository.RepositoryConnection;
 public class TestLinkedDataProvider extends ProviderTestBase {
 
     private static final String DBPEDIA = "http://dbpedia.org/resource/Berlin";
-    private static final String GEONAMES = "http://sws.geonames.org/3020251/";
+    private static final String GEONAMES = "https://sws.geonames.org/3020251/";
     private static final String GEONAMES2 = "http://sws.geonames.org/2658434/about.rdf";
     private static final String MARMOTTA = "http://rdfohloh.wikier.org/project/marmotta";
     private static final String WIKIER = "http://www.wikier.org/foaf#wikier";

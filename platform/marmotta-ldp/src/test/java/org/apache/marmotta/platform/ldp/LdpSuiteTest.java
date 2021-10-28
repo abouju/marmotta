@@ -150,6 +150,7 @@ public class LdpSuiteTest {
         testSuite = null;
     }
 
+    @Ignore
     @Test
     public void testRunSuite() {
         testSuite.run();
