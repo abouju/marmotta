@@ -211,7 +211,6 @@
             <artifactId>sesame-store-testsuite</artifactId>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>com.google.code.tempus-fugit</groupId>
             <artifactId>tempus-fugit</artifactId>

@@ -52,5 +52,9 @@ public class DoubleLiteralExternalizer extends BaseExternalizer<KiWiDoubleLitera
     @Override
     public KiWiDoubleLiteral readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readDoubleLiteral(input);
+    }	
+    @Override
+    public KiWiDoubleLiteral createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readDoubleLiteral(input);
     }
 }

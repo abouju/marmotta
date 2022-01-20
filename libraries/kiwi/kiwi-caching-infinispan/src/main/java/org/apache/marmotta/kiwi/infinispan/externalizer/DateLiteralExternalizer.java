@@ -53,4 +53,9 @@ public class DateLiteralExternalizer extends BaseExternalizer<KiWiDateLiteral> i
     public KiWiDateLiteral readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readDateLiteral(input);
     }
+    
+    @Override
+    public KiWiDateLiteral createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readDateLiteral(input);
+    }
 }

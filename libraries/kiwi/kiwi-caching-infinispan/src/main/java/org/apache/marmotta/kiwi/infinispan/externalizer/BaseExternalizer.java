@@ -59,7 +59,7 @@ public abstract class BaseExternalizer<T> implements Externalizer, AdvancedExter
      * @throws java.io.IOException    if an error occurs
      * @throws ClassNotFoundException if a class could not be found during read
      */
-    @Override
+    //@Override
     public Object createExternal(Class<?> subjectType, ObjectInput input, Creator defaultCreator) throws IOException, ClassNotFoundException {
         return readObject(input);
     }
@@ -73,7 +73,7 @@ public abstract class BaseExternalizer<T> implements Externalizer, AdvancedExter
      * @throws java.io.IOException    if an error occurs
      * @throws ClassNotFoundException if a class could not be found during read
      */
-    @Override
+    //@Override
     public void readExternal(Object subject, ObjectInput input) throws IOException, ClassNotFoundException {
         // no-op
     }

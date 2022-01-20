@@ -54,5 +54,10 @@ public class BNodeExternalizer extends BaseExternalizer<KiWiAnonResource> implem
     public KiWiAnonResource readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readBNode(input);
     }
+    
+    @Override
+    public KiWiAnonResource createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readBNode(input);
+    }
 
 }

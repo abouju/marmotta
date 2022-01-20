@@ -53,4 +53,9 @@ public class BooleanLiteralExternalizer extends BaseExternalizer<KiWiBooleanLite
     public KiWiBooleanLiteral readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readBooleanLiteral(input);
     }
+    
+    @Override
+    public KiWiBooleanLiteral createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readBooleanLiteral(input);
+    }
 }

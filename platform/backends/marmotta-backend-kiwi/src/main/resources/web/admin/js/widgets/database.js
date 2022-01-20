@@ -26,7 +26,7 @@ function endsWith(str, suffix) {
 	        host: 'http://localhost:8080/LMF/',
             anker_name: 'database',
             title: 'Database Configuration',
-            loading_img: '../public/img/loader/ajax-loader_small.gif',
+            loading_img: '../../core/public/img/loader/ajax-loader_small.gif',
             toplink:true
         }
 

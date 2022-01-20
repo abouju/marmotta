@@ -48,12 +48,13 @@
         <dependency>
             <groupId>edu.jhuapl.tinkerpop</groupId>
             <artifactId>blueprints-accumulo-graph</artifactId>
-            <!-- <version>${accumulograph.version}</version> -->
+            <version>${accumulograph.version}</version>
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.blueprints</groupId>
             <artifactId>blueprints-graph-sail</artifactId>
-            <!-- <version>${blueprints.version}</version> -->
+            <!-- TODO: create a shared blueprints version in marmotta-parent -->
+            <version>2.6.0</version>
         </dependency>
     </dependencies>
 

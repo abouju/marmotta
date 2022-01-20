@@ -31,7 +31,7 @@ import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfiguration;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
 import org.infinispan.context.Flag;
-import org.infinispan.distribution.ch.SyncConsistentHashFactory;
+//import org.infinispan.distribution.ch.TopologyAwareConsistentHashFactory;
 import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
@@ -155,14 +155,14 @@ public class InfinispanEmbeddedCacheManager implements CacheManager {
         defaultConfiguration = new ConfigurationBuilder()
                 .clustering()
                     .cacheMode(CacheMode.DIST_ASYNC)
-                    .async()
-                        .asyncMarshalling()
+//                    .async()
+//                        .asyncMarshalling()
                     .l1()
                         .lifespan(5, TimeUnit.MINUTES)
                     .hash()
                         .numOwners(2)
                         .numSegments(40)
-                        .consistentHashFactory(new SyncConsistentHashFactory())
+//                        .consistentHashFactory(new TopologyAwareConsistentHashFactory())
                     .stateTransfer()
                         .fetchInMemoryState(false)
                     .timeout(config.getClusterTimeout())
@@ -210,8 +210,8 @@ public class InfinispanEmbeddedCacheManager implements CacheManager {
         defaultConfiguration = new ConfigurationBuilder()
                 .clustering()
                     .cacheMode(CacheMode.REPL_ASYNC)
-                    .async()
-                        .asyncMarshalling()
+//                    .async()
+//                        .asyncMarshalling()
                     .stateTransfer()
                         .fetchInMemoryState(false)
                     .timeout(config.getClusterTimeout())

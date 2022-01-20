@@ -53,4 +53,9 @@ public class TripleExternalizer extends BaseExternalizer<KiWiTriple> implements 
     public KiWiTriple readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readTriple(input);
     }
+    
+    @Override
+    public KiWiTriple createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readTriple(input);
+    }
 }

@@ -32,7 +32,7 @@ import org.openrdf.repository.RepositoryException;
 public class EmbeddedClusterTest extends BaseClusterTest {
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws Exception{
         ClusterTestSupport s = new ClusterTestSupport(CachingBackends.INFINISPAN_CLUSTERED);
         s.setup();
     }

@@ -53,4 +53,9 @@ public class IntLiteralExternalizer extends BaseExternalizer<KiWiIntLiteral> imp
     public KiWiIntLiteral readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readIntLiteral(input);
     }
+    
+    @Override
+    public KiWiIntLiteral createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readIntLiteral(input);
+    }
 }

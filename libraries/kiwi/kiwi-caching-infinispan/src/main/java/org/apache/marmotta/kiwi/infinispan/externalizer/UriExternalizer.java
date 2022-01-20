@@ -53,5 +53,9 @@ public class UriExternalizer extends BaseExternalizer<KiWiUriResource> implement
     public KiWiUriResource readObject(ObjectInput input) throws IOException, ClassNotFoundException {
         return KiWiIO.readURI(input);
     }
-
+ 
+    @Override
+    public KiWiUriResource createExternal(Class<?> targetClass, ObjectInput input ) throws IOException, ClassNotFoundException {
+    return KiWiIO.readURI(input);
+    }
 }
