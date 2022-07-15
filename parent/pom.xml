@@ -38,7 +38,7 @@
     <properties>
         <sesame.version>2.7.16</sesame.version>
         <junit.version>4.11</junit.version>
-        <weld.version>2.1.Final</weld.version>
+        <weld.version>2.2.Final</weld.version>
         <weld.core.version>2.1.2.Final</weld.core.version>
         <rest.assured.version>2.3.2</rest.assured.version>
         <hamcrest.version>1.3</hamcrest.version>
@@ -49,10 +49,10 @@
         <h2.version>1.4.178</h2.version>
         <postgresql.version>42.3.1</postgresql.version>
         <mysql.version>5.1.21</mysql.version>
-        <jetty.version>9.2.1.v20140609</jetty.version>
+        <jetty.version>10.0.9</jetty.version><!--9.2.22.v20170606 9.4.0.v20180619-->
         <resteasy.version>3.0.18.Final</resteasy.version>
-        <jackson.version>2.3.3</jackson.version>
-        <titan.version>0.4.2</titan.version>
+        <jackson.version>2.6.7</jackson.version> <!--2.3.3;2.6.7-->
+        <titan.version>0.5.4</titan.version>
         <accumulograph.version>0.2.1</accumulograph.version>
         <jax.doclets.version>0.10.1</jax.doclets.version>
     </properties>
@@ -104,8 +104,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.5.1</version>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
@@ -208,7 +208,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.marmotta</groupId>
                                         <artifactId>buildinfo-maven-plugin</artifactId>
-                                        <versionRange>[1.3-SNAPSHOT,)</versionRange>
+                                        <versionRange>[1.3.3,)</versionRange>
                                         <goals>
                                             <goal>extract</goal>
                                         </goals>
@@ -260,7 +260,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.apache.maven.plugins</groupId>
                                         <artifactId>maven-dependency-plugin</artifactId>
-                                        <versionRange>[3.0.1,)</versionRange>
+                                        <versionRange>[3.0.2,)</versionRange>
                                         <goals>
                                             <goal>list</goal>
                                         </goals>
@@ -620,12 +620,12 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>19.0</version>
+                <version>31.1-jre</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.6</version>
+                <version>2.8.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-configuration</groupId>
@@ -671,15 +671,9 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcore</artifactId>
-                <version>4.3.2</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>4.4.12</version>
             </dependency>
-            <dependency>
+           <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpmime</artifactId>
                 <version>4.3.5</version>
@@ -693,7 +687,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.3.5</version>
+                <version>4.5.13</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-logging</groupId>
@@ -704,7 +698,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient-cache</artifactId>
-                <version>4.3.5</version>
+                <version>4.5.13</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-logging</groupId>
@@ -806,7 +800,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.5</version>
+                <version>1.2.11</version>
                                 <exclusions>
                     <exclusion>
                         <groupId>log4j</groupId>
@@ -821,7 +815,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.5</version>
+                <version>1.2.11</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.cal10n</groupId>
@@ -906,7 +900,7 @@
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
-                <version>20090211</version>
+                <version>20131018</version>
             </dependency>
 
             <!-- CDI/Java EE 6 Environment -->
@@ -1012,13 +1006,13 @@
             <dependency>
                 <groupId>org.webjars</groupId>
                 <artifactId>jquery</artifactId>
-                <version>1.8.2</version>
+                <version>3.6.0</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>org.webjars</groupId>
                 <artifactId>jquery-ui</artifactId>
-                <version>1.10.3</version>
+                <version>1.13.1</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
@@ -1151,7 +1145,12 @@
                 <version>3.2.10.Final</version>
             </dependency>
             -->
-
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>3.3.0.Final</version>
+            </dependency>
+            
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
@@ -1176,11 +1175,7 @@
                 <artifactId>tomcat-jdbc</artifactId>
                 <version>7.0.55</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat-juli</artifactId>
-                <version>7.0.55</version>
-            </dependency>
+
 
             <!--Secure  Unique IDs -->
             <dependency>
@@ -1570,7 +1565,7 @@
             <dependency>
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>
-                <version>1.4</version>
+                <version>1.28.1</version>
             </dependency>
 		    <dependency>
 		        <groupId>com.ibm.icu</groupId>
@@ -1732,7 +1727,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.8.3</version>
+                <version>1.14.3</version>
             </dependency>
 
             <dependency>

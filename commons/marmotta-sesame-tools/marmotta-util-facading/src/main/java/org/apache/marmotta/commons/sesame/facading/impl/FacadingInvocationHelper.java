@@ -103,8 +103,13 @@ class FacadingInvocationHelper {
 
     static boolean isMultiValue(Method method) {
         final FacadingInvocationHandler.OPERATOR oper = FacadingInvocationHandler.OPERATOR.getOperator(method);
-        return oper.writeOp && method.getParameterTypes().length == 0 ||
-                FacadeUtils.isCollection(oper.writeOp && oper.numArgs > 0 ? method.getParameterTypes()[0] : method.getReturnType());
+
+        
+        Class Cl = (oper.writeOp && oper.numArgs > 0 ? method.getParameterTypes()[0] : method.getReturnType());
+
+       
+        
+        return oper.writeOp && method.getParameterTypes().length == 0 || FacadeUtils.isCollection(Cl) ;//|| FacadeUtils.isCollection((oper.writeOp && oper.numArgs > 0 ? method.getParameterTypes()[0] : method.getReturnType()));
     }
 
     static boolean checkLocale(final Locale loc, final Value object) {

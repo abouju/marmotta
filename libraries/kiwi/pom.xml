@@ -44,7 +44,7 @@
                     <configuration>
                         <systemPropertyVariables>
                             <!-- enable or pass on command line for testing local PostgreSQL -->
-                            <postgresql.url>jdbc:postgresql://localhost:5433/kiwitest?prepareThreshold=3&amp;socketTimeout=2</postgresql.url>
+                            <postgresql.url>jdbc:postgresql://localhost:5432/kiwitest?prepareThreshold=3&amp;socketTimeout=2</postgresql.url>
                             <postgresql.user>kiwi</postgresql.user>
                             <postgresql.pass>kiwi</postgresql.pass>
 

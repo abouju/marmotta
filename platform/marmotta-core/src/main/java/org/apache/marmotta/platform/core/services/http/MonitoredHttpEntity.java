@@ -20,7 +20,6 @@ package org.apache.marmotta.platform.core.services.http;
 import org.apache.marmotta.platform.core.api.task.Task;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.annotation.NotThreadSafe;
 import org.apache.http.entity.HttpEntityWrapper;
 
 import java.io.*;
@@ -30,7 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * An implementation of {@link HttpEntity} that reports write/read operations to a {@link Task}.
  * 
  */
-@NotThreadSafe
+
 class MonitoredHttpEntity extends HttpEntityWrapper {
 
     private MonitoredInputStream foo = null;

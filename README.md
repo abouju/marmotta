@@ -137,3 +137,46 @@ The goal of this fork is to have triplestore for geosparql.
 This version is working with a debian 11, openjdk version "11.0.12", postgresql-13, jdbc postgresql 42.3.1
 It was tested with a war and apache-tomcat-8.5.47
 
+maven-plugin-annotations 
+3.2 -> 3.3
+weld
+2.1.Final -> 2.2.Final
+jetty
+9.2.1.v20140609 -> 10.0.9
+jackson
+2.3.3 -> 2.6.7
+titan
+0.4.2 -> 0.5.4
+guava
+19.0 -> 31.1-jre
+commons-io
+2.6 -> 2.8.0
+httpcore ?
+httpclient
+4.3.5 -> 4.5.13
+httpcore
+4.3.2 -> 4.4.12
+httpclient
+4.3.5 -> 4.5.13
+httpclient-cache
+4.3.5 -> 4.5.13
+logback-core
+1.2.5 -> 1.2.11
+ch.qos.logback
+1.2.5 -> 1.2.11
+org.json
+20090211 -> 20131018
+jquery
+1.8.2 -> 3.6.0
+jquery-ui
+1.10.3 -> 1.13.1
+tomcat-jdbc
+7.0.55 -> 10.0.20
+tomcat-juli
+7.0.55 -> 10.0.14
+tika-core
+1.4 -> 1.28.1
+jsoup
+1.8.3 -> 1.14.3
+
+

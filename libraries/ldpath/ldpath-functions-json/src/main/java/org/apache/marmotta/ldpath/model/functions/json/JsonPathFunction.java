@@ -79,7 +79,7 @@ public class JsonPathFunction<Node> extends SelectorFunction<Node> {
         List<String> result = new ArrayList<>();
 
         for (String jsonpath : jsonpaths) {
-            result.add(String.valueOf(JsonPath.read(in, jsonpath)));
+            result.add(String.valueOf(JsonPath.read(in, jsonpath).toString()));
         }
 
         return result;

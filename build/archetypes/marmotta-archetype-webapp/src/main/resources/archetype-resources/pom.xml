@@ -53,6 +53,7 @@
         <resteasy.version>${resteasyVersion}</resteasy.version>
         <jackson.version>${jacksonVersion}</jackson.version>
         <titan.version>${titanVersion}</titan.version>
+        <commons-beanutils.version>${commons-beanutilsVersion}</commons-beanutils.version>
     </properties>
 
     <build>

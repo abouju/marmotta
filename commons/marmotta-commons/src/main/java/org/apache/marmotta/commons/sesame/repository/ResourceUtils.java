@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.Collections;
 
 /**
  * Utility methods for simplifying certain common tasks. All methods are static and take as first argument a
@@ -252,7 +253,7 @@ public class ResourceUtils {
                         return ResultUtils.unwrap(rcon.getResources());
                     } catch (RepositoryException e) {
                         ExceptionUtils.handleRepositoryException(e,ResourceUtils.class);
-                        return Iterators.emptyIterator();
+                        return Collections.emptyIterator();
                     }
                 }
             };
@@ -323,7 +324,7 @@ public class ResourceUtils {
                         }
                     } catch (RepositoryException e) {
                         ExceptionUtils.handleRepositoryException(e,ResourceUtils.class);
-                        return Iterators.emptyIterator();
+                        return Collections.emptyIterator();
                     }
 
                 }
@@ -336,6 +337,7 @@ public class ResourceUtils {
                     Iterator<URI> result = Iterators.transform(
                             Iterators.filter(
                                     listResources(con).iterator(),
+                                    
                                     new Predicate<Resource>() {
                                         @Override
                                         public boolean apply(Resource input) {
@@ -409,7 +411,7 @@ public class ResourceUtils {
                             });
                 } catch (RepositoryException e) {
                     ExceptionUtils.handleRepositoryException(e,ResourceUtils.class);
-                    return Iterators.emptyIterator();
+                    return Collections.emptyIterator();
                 }
             }
         };
@@ -788,7 +790,7 @@ public class ResourceUtils {
                     return ResultUtils.unwrap(con.getStatements(r, property, null, true, contexts));
                 } catch (RepositoryException ex) {
                     ExceptionUtils.handleRepositoryException(ex, ResourceUtils.class);
-                    return Iterators.emptyIterator();
+                    return Collections.emptyIterator();
                 }
             }
         };
@@ -971,7 +973,7 @@ public class ResourceUtils {
                     return ResultUtils.unwrap(con.getStatements(null, property, r, true, contexts));
                 } catch (RepositoryException ex) {
                     ExceptionUtils.handleRepositoryException(ex, ResourceUtils.class);
-                    return Iterators.emptyIterator();
+                    return Collections.emptyIterator();
                 }
             }
         };
@@ -1178,7 +1180,7 @@ public class ResourceUtils {
                                         return ResultUtils.unwrap(con.getStatements(r,rdf_type,null,true,contexts));
                                     } catch (RepositoryException e) {
                                         ExceptionUtils.handleRepositoryException(e, ResourceUtils.class);
-                                        return Iterators.emptyIterator();
+                                        return Collections.emptyIterator();
                                     }
                                 }
                             },

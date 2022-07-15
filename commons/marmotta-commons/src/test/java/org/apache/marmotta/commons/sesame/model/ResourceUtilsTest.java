@@ -207,7 +207,7 @@ public class ResourceUtilsTest {
 
 
             // Part 2: limited listing; check whether limit and offset work as expected
-            List<String> resources2 = ImmutableList.copyOf(
+            List<Object> resources2 = ImmutableList.copyOf(
                     Iterables.transform(
                             ResourceUtils.listResourcesByPrefix(connection, "http://localhost:8080/LMF/resource/",0,2),
                             new Function<Resource, String>() {
@@ -223,14 +223,14 @@ public class ResourceUtilsTest {
             Assert.assertEquals(2,resources2.size());
 
             // test if the result contains some of resources that have been used as subject
-            Assert.assertThat(resources2, anyOf(
+            Assert.assertThat(resources2, org.hamcrest.Matchers.anyOf(
                     hasItem("http://localhost:8080/LMF/resource/hans_meier"),
                     hasItem("http://localhost:8080/LMF/resource/sepp_huber"),
                     hasItem("http://localhost:8080/LMF/resource/anna_schmidt")
                     ));
 
             // increase offset by 2 (i.e. next batch of resources)
-            List<String> resources3 = ImmutableList.copyOf(
+            List<Object> resources3 = ImmutableList.copyOf(
                     Iterables.transform(
                             ResourceUtils.listResourcesByPrefix(connection, "http://localhost:8080/LMF/resource/",2,2),
                             new Function<Resource, String>() {
