@@ -30,7 +30,7 @@
 <head>
     <title>Timemap in HTML</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script type="text/javascript" src="${SERVER_URL}webjars/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="${SERVER_URL}webjars/jquery/3.6.0/jquery.min.js"></script>
     <link href="${SERVER_URL}${DEFAULT_STYLE}style.css" rel="stylesheet" type="text/css" />
     <link href="${SERVER_URL}${DEFAULT_STYLE}rdfhtml.css" rel="stylesheet" type="text/css" />
 

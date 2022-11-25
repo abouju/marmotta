@@ -149,7 +149,6 @@ public class FieldMapping<T,Node> implements LDPathConstruct<Node> {
                 return transformer.transform(backend,input, getFieldConfig());
             }
         };
-
         return Collections2.transform(selector.select(backend,context, null, null),function);
     }
 

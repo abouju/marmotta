@@ -25,7 +25,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>${status} ${reason} - Marmotta Error</title>
-    <script src="${SERVER_URL}webjars/jquery/1.8.2/jquery.min.js" type="text/javascript" ></script>
+    <script src="${SERVER_URL}webjars/jquery/3.6.0/jquery.min.js" type="text/javascript" ></script>
     <link href="${SERVER_URL}${DEFAULT_STYLE}style.css" rel="stylesheet" type="text/css" />
     <link href="${SERVER_URL}${DEFAULT_STYLE}rdfhtml.css" rel="stylesheet" type="text/css" />
     <link href="${SERVER_URL}${DEFAULT_STYLE}error.css" rel="stylesheet" type="text/css" />
