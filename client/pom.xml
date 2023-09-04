@@ -64,7 +64,7 @@
     <modules>
         <module>marmotta-client-java</module>
         <module>marmotta-client-js</module>
-        <module>marmotta-client-js-sample-webapp</module> 
+        <module>marmotta-client-js-sample-webapp</module>
     </modules>
     
     <profiles>

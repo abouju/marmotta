@@ -15,7 +15,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<Context docBase="/usr/share/marmotta/marmotta.war" unpackWAR="false" useNaming="true">
+<Context docBase="/usr/share/marmotta/marmotta.war" unpackWAR="true" useNaming="true">
 
   <Parameter name="marmotta.home" value="/var/lib/marmotta" override="false"/>
 

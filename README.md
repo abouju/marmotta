@@ -100,10 +100,16 @@ or testing:
 
 An official images is [available from Docker Hub](https://hub.docker.com/r/apache/marmotta/) as 
 an automated build, so you just need to pull it from there to replace the second step above: 
-
+(it's an older version)
     docker pull apache/marmotta
 
+An unofficial images is [available from Docker Hub](https://hub.docker.com/r/abouj/marmotta/) as 
+an automated build, so you just need to pull it from there to replace the second step above: 
 
+    docker pull abouj/marmotta
+
+(marmotta snapshot, java 17, tomcat 9)
+    
 ## Building with a Clean Repository
 
 Sometimes it is useful to check if the build runs properly on a clean local

@@ -17,7 +17,7 @@
 
 # SIGTERM-handler
 sigterm_handler() {
-  service tomcat7 stop
+#  service tomcat9 stop
   service postgresql stop
   exit 143; # 128 + 15 -- SIGTERM
 }
@@ -28,11 +28,16 @@ trap 'kill ${!}; sigterm_handler' SIGTERM
 
 # run application
 service postgresql start
-service tomcat7 start
-
+# service tomcat start
+export CATALINA_HOME=/opt/tomcat
+export CATALINA_BASE=/opt/tomcat
+export CATALINA_TMPDIR=/tmp
+export JAVA_OPTS=-Djava.awt.headless=true
+/opt/tomcat/bin/startup.sh
+	
 # wait indefinetely
 while true
 do
-  tail -f /var/log/tomcat7/catalina.out & wait ${!}
+  tail -f /opt/tomcat/logs/catalina.out & wait ${!}
 done
 
