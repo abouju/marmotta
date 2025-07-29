@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.naming.NamingException;
 import javax.naming.spi.NamingManager;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 /**
  * Listener to enable custom JNDI implementation
@@ -44,10 +44,11 @@ public class MarmottaJndiListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         log.info("JNDI: registering Apache Marmotta JNDI implementation ...");
+        //new MarmottaInitialContextFactoryBuilder();
         try {
             NamingManager.setInitialContextFactoryBuilder(new MarmottaInitialContextFactoryBuilder());
         } catch (NamingException e) {
-
+	e.printStackTrace();
         } catch (IllegalStateException e) {
             log.info("JNDI: a context factory of type is already installed");
         }

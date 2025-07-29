@@ -45,7 +45,6 @@ public class JsonPathFunction<Node> extends SelectorFunction<Node> {
     @SafeVarargs
     @Override
     public final Collection<Node> apply(RDFBackend<Node> rdfBackend, Node context, @SuppressWarnings("unchecked") Collection<Node>... args) throws IllegalArgumentException {
-
         Set<String> jsonpaths = new HashSet<>();
         for (Node jsonpath : args[0]) {
             try {
@@ -71,17 +70,14 @@ public class JsonPathFunction<Node> extends SelectorFunction<Node> {
                 result.add(rdfBackend.createLiteral(r));
             }
         }
-
         return result;
     }
 
     private List<String> doFilter(String in, Set<String> jsonpaths) {
         List<String> result = new ArrayList<>();
-
         for (String jsonpath : jsonpaths) {
             result.add(String.valueOf(JsonPath.read(in, jsonpath).toString()));
         }
-
         return result;
     }
 

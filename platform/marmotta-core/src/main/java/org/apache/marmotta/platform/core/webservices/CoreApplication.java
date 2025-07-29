@@ -23,7 +23,8 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
@@ -39,6 +40,7 @@ import java.util.Set;
  * @author Sebastian Schaffert
  *
  */
+@ApplicationPath("/")
 public class CoreApplication extends Application {
 
     private Logger log = LoggerFactory.getLogger(CoreApplication.class);

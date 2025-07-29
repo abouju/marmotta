@@ -38,7 +38,7 @@ import java.util.Set;
  */
 public class StatementCommons {
 
-    private final static Equivalence<Statement> TRIPLE_EQUIVALENCE = new Equivalence<Statement>() {
+    private final static Equivalence<org.openrdf.model.Statement> TRIPLE_EQUIVALENCE = new Equivalence<org.openrdf.model.Statement>() {
         @Override
         protected boolean doEquivalent(Statement a, Statement b) {
             if(a == b) return true;
@@ -66,7 +66,7 @@ public class StatementCommons {
     };
 
 
-    private final static Equivalence<Statement> QUADRUPLE_EQUIVALENCE = new Equivalence<Statement>() {
+    private final static Equivalence<org.openrdf.model.Statement> QUADRUPLE_EQUIVALENCE = new Equivalence<Statement>() {
         @Override
         protected boolean doEquivalent(Statement a, Statement b) {
             if(a == b) return true;
@@ -99,7 +99,7 @@ public class StatementCommons {
      *
      * @return
      */
-    public static Equivalence<Statement> tripleEquivalence() {
+    public static Equivalence<org.openrdf.model.Statement> tripleEquivalence() {
         return TRIPLE_EQUIVALENCE;
     }
 
@@ -108,7 +108,7 @@ public class StatementCommons {
      *
      * @return
      */
-    public static Equivalence<Statement> quadrupleEquivalence() {
+    public static Equivalence<org.openrdf.model.Statement> quadrupleEquivalence() {
         return QUADRUPLE_EQUIVALENCE;
 
     }

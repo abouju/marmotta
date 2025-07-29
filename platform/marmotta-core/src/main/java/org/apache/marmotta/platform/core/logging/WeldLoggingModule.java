@@ -20,7 +20,7 @@ package org.apache.marmotta.platform.core.logging;
 import ch.qos.logback.classic.Level;
 import com.google.common.collect.ImmutableList;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 
 /**
@@ -76,6 +76,6 @@ public class WeldLoggingModule extends BaseLoggingModule {
      */
     @Override
     public Collection<String> getPackages() {
-        return ImmutableList.of("org.jboss.weld", "javax.enterprise", "javax.decorator", "javax.inject");
+        return ImmutableList.of("org.jboss.weld", "jakarta.enterprise", "jakarta.decorator", "jakarta.inject");
     }
 }

@@ -62,7 +62,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <h2.url>jdbc:h2:mem:test;MVCC=true;DB_CLOSE_ON_EXIT=TRUE</h2.url>
+                        <h2.url>jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=TRUE</h2.url>
                         <h2.user>sa</h2.user>
                         <h2.pass />
 

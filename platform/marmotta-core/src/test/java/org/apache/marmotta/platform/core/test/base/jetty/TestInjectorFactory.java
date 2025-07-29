@@ -20,8 +20,7 @@ package org.apache.marmotta.platform.core.test.base.jetty;
 import org.jboss.resteasy.cdi.CdiConstructorInjector;
 import org.jboss.resteasy.cdi.CdiPropertyInjector;
 import org.jboss.resteasy.cdi.ResteasyCdiExtension;
-import org.jboss.resteasy.core.ValueInjector;
-import org.jboss.resteasy.logging.Logger;
+import org.jboss.resteasy.spi.ValueInjector;
 import org.jboss.resteasy.spi.ConstructorInjector;
 import org.jboss.resteasy.spi.InjectorFactory;
 import org.jboss.resteasy.spi.MethodInjector;
@@ -31,10 +30,13 @@ import org.jboss.resteasy.spi.metadata.Parameter;
 import org.jboss.resteasy.spi.metadata.ResourceClass;
 import org.jboss.resteasy.spi.metadata.ResourceConstructor;
 import org.jboss.resteasy.spi.metadata.ResourceLocator;
+// import org.jboss.resteasy.logging.Logger; change with log4j
+//import org.jboss.logging.Logger;
+import org.apache.log4j.Logger;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanManager;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
@@ -74,11 +76,13 @@ public class TestInjectorFactory implements InjectorFactory {
 
         if (!manager.getBeans(clazz).isEmpty())
         {
-            log.debug("Using CdiConstructorInjector for class {0}.", clazz);
+            log.debug("Using CdiConstructorInjector for class {0}."+ clazz.getSimpleName());
+            //log.debug("Using CdiConstructorInjector for class {0}.", clazz);
             return new CdiConstructorInjector(clazz, manager);
         }
 
-        log.debug("No CDI beans found for {0}. Using default ConstructorInjector.", clazz);
+        log.debug("No CDI beans found for {0}. Using default ConstructorInjector."+ clazz.getSimpleName());
+        //log.debug("No CDI beans found for {0}. Using default ConstructorInjector.", clazz);
         return delegate.createConstructor(constructor, factory);
 
     }
@@ -93,19 +97,25 @@ public class TestInjectorFactory implements InjectorFactory {
         return delegate.createMethodInjector(method, factory);
     }
 
-    @Override
-    public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, Class type, Type genericType, Annotation[] annotations, ResteasyProviderFactory factory) {
-        return delegate.createParameterExtractor(injectTargetClass, injectTarget, type, genericType, annotations, factory);
-    }
+   // @Override
+   // public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, Class type, Type genericType, Annotation[] annotations, ResteasyProviderFactory factory) {
+   //     return delegate.createParameterExtractor(injectTargetClass, injectTarget, type, genericType, annotations, factory);
+   // }
 
-    @Override
-    public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, Class type, Type genericType, Annotation[] annotations, boolean useDefault, ResteasyProviderFactory factory) {
-        return delegate.createParameterExtractor(injectTargetClass, injectTarget, type, genericType, annotations, useDefault, factory);
-    }
+    //@Override
+    //public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, Class type, Type genericType, Annotation[] annotations, boolean useDefault, ResteasyProviderFactory factory) {
+    //    return delegate.createParameterExtractor(injectTargetClass, injectTarget, type, genericType, annotations, useDefault, factory);
+    //}
 
     @Override
     public ValueInjector createParameterExtractor(Parameter parameter, ResteasyProviderFactory providerFactory) {
-        return delegate.createParameterExtractor(parameter, providerFactory);
+   	    return delegate.createParameterExtractor(parameter, providerFactory);
+    }
+    
+    @Override		   
+    public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, String chaine, Class type, Type genericType,Annotation[] annotations,boolean useDefault,ResteasyProviderFactory factory)
+    {
+    	    return delegate.createParameterExtractor(injectTargetClass, injectTarget,  chaine, type, genericType, annotations, useDefault, factory);
     }
 
     @Override
@@ -130,5 +140,12 @@ public class TestInjectorFactory implements InjectorFactory {
         CreationalContext<?> context = manager.createCreationalContext(bean);
         return (ResteasyCdiExtension) manager.getReference(bean, ResteasyCdiExtension.class, context);
     }
+
+	@Override
+	public ValueInjector createParameterExtractor(Class injectTargetClass, AccessibleObject injectTarget, String chaine, Class type, Type genericType,
+			Annotation[] annotations, ResteasyProviderFactory factory) {
+		// TODO Auto-generated method stub
+		return delegate.createParameterExtractor(injectTargetClass, injectTarget,  chaine, type, genericType, annotations, factory);
+	}
 
 }

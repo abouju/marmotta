@@ -22,10 +22,10 @@ import org.apache.marmotta.platform.user.api.AuthenticationProvider;
 import org.apache.marmotta.platform.user.model.UserAccount;
 import org.apache.marmotta.platform.user.services.AuthenticationServiceImpl;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Named(AuthenticationServiceImpl.DEFAULT_AUTH_PROVIDER_NAMED)

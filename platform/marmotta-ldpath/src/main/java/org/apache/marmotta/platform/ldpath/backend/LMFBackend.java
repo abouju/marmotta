@@ -22,9 +22,9 @@ import org.apache.marmotta.platform.core.api.triplestore.SesameService;
 import org.apache.marmotta.ldpath.backend.sesame.SesameRepositoryBackend;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 /**
  * Implementation of the LDPath RDFBackend<KiWiNode>, making use of the LMF internal triple store

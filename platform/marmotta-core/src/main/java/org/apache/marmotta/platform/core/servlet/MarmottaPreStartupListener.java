@@ -24,8 +24,8 @@ import org.apache.marmotta.platform.core.util.CDIContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 /**
  * This listener is executed first in the startup chain, initializing the Apache 

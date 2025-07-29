@@ -24,11 +24,11 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 /**
  * This service auto-registers JAX-RS interceptors implementing the CDIInterceptor interface and
@@ -49,10 +49,14 @@ public class InterceptorServiceImpl implements InterceptorService {
     private Instance<CDIInterceptor> interceptors;
 
     @PostConstruct
-    protected void initialize() {
+    public void initialize() {
+      try {
         ResteasyProviderFactory factory = ResteasyProviderFactory.getInstance();
 
         register(factory);
+        } catch (Exception ex) {
+		log.debug("initialize interceptor: {}", ex.getMessage());
+        }
     }
 
     public void register(ResteasyProviderFactory factory) {

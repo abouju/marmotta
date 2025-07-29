@@ -21,8 +21,8 @@ import org.apache.marmotta.platform.core.api.ssl.SSLService;
 import org.apache.marmotta.platform.core.events.ConfigurationServiceInitEvent;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;

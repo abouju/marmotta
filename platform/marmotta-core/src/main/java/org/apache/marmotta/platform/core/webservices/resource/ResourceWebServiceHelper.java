@@ -25,7 +25,7 @@ import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 import org.openrdf.model.Resource;
 import org.openrdf.model.URI;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;

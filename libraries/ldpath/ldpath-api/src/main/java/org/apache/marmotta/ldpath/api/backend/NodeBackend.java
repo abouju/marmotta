@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Value centered Backend for LDPath, conatins all methods required for parsing and serializing a LDPath-Program
+ * Value centered Backend for LDPath, contains all methods required for parsing and serializing a LDPath-Program
  */
 public interface NodeBackend<Node> {
 

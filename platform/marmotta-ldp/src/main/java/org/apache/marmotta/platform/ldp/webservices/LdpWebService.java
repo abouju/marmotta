@@ -46,11 +46,11 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.*;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;

@@ -19,7 +19,7 @@ package org.apache.marmotta.platform.core.api.modules;
 
 import org.apache.marmotta.platform.core.model.module.ModuleConfiguration;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;

@@ -36,11 +36,11 @@ import org.openrdf.repository.RepositoryResult;
 import org.openrdf.sail.SailException;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;

@@ -25,7 +25,7 @@ import org.apache.marmotta.platform.core.api.logging.LoggingModule;
 import org.apache.marmotta.platform.core.api.logging.LoggingService;
 import org.apache.marmotta.platform.core.model.logging.LoggingOutput;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 
 /**

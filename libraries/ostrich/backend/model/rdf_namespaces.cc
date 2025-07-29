@@ -20,7 +20,7 @@
 namespace marmotta {
 namespace rdf {
 
-const NsMap & NamespacesByPrefix() {
+const std::map<std::string, std::string>& NamespacesByPrefix() {
     static const std::map<std::string, std::string> kNamespacePrefixes = {
             {"skos:", "http://www.w3.org/2004/02/skos/core#"},
             {"rdf:",  "http://www.w3.org/1999/02/22-rdf-syntax-ns#"},
@@ -32,14 +32,15 @@ const NsMap & NamespacesByPrefix() {
             {"dcelems:", "http://purl.org/dc/elements/1.1/"},
             {"dctypes:", "http://purl.org/dc/dcmitype/"},
             {"dbpedia:", "http://dbpedia.org/resource/"},
+
     };
     return kNamespacePrefixes;
 }
 
 // Apply prefix substitution for well-known URIs to save disk space.
 // Modifies the string passed as argument.
-void EncodeWellknownURI(std::string* uri, const NsMap & namespaces) {
-    for (auto& ns : namespaces) {
+void EncodeWellknownURI(std::string* uri) {
+    for (auto& ns : NamespacesByPrefix()) {
         if (uri->compare(0, ns.second.size(), ns.second) == 0) {
             std::string tmp = ns.first;
             tmp += uri->substr(ns.second.size());
@@ -51,8 +52,8 @@ void EncodeWellknownURI(std::string* uri, const NsMap & namespaces) {
 
 // Unapply prefix substitution for well-known URIs.
 // Modifies the string passed as argument.
-void DecodeWellknownURI(std::string* uri, const NsMap & namespaces) {
-    for (auto& ns : namespaces) {
+void DecodeWellknownURI(std::string* uri) {
+    for (auto& ns : NamespacesByPrefix()) {
         if (uri->compare(0, ns.first.size(), ns.first) == 0) {
             std::string tmp = ns.second;
             tmp += uri->substr(ns.first.size());

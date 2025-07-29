@@ -169,6 +169,7 @@ public abstract class AbstractHttpProvider implements DataProvider {
 
             if(log.isInfoEnabled()) {
                 log.info("retrieved {} triples for resource {}; expiry date: {}", new Object[]{handler.triples.size(), resource, expiresDate});
+                log.info("triple \n"+handler.triples);
             }
 
             ClientResponse result = new ClientResponse(handler.httpStatus, handler.triples);

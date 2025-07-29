@@ -19,7 +19,7 @@ package org.apache.marmotta.platform.core.api.config;
 
 import org.apache.commons.configuration.Configuration;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;

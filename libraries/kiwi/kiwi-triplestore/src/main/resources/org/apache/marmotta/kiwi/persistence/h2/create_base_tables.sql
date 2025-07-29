@@ -14,9 +14,9 @@
 -- limitations under the License.
 
 CREATE TABLE nodes (
-  id        bigint     NOT NULL,
+  id        BIGINT       PRIMARY KEY, 
   ntype     char(8)    NOT NULL,
-  svalue    varchar(2147483647) NOT NULL,
+  svalue    varchar(1000000000) NOT NULL,
   dvalue    double precision,
   ivalue    bigint,
   tvalue    timestamp,
@@ -25,13 +25,12 @@ CREATE TABLE nodes (
   ltype     bigint     REFERENCES nodes(id),
   lang      varchar(5),
   createdAt timestamp  NOT NULL DEFAULT now(),
-  gvalue    varchar(2147483647),
-  srid      INT,
-  PRIMARY KEY(id)
+  gvalue    varchar(1000000000),
+  srid      INT
 );
 
 CREATE TABLE triples (
-  id        bigint     NOT NULL,
+  id        BIGINT       PRIMARY KEY,
   subject   bigint     NOT NULL REFERENCES nodes(id),
   predicate bigint     NOT NULL REFERENCES nodes(id),
   object    bigint     NOT NULL REFERENCES nodes(id),
@@ -41,24 +40,21 @@ CREATE TABLE triples (
   deleted   boolean    DEFAULT false,
   createdAt timestamp  NOT NULL DEFAULT now(),
   deletedAt timestamp,
-  PRIMARY KEY(id),
   CHECK ( (deleted AND deletedAt IS NOT NULL) OR ((NOT deleted) AND deletedAt IS NULL) )
 );
 
 CREATE TABLE namespaces (
-  id        bigint        NOT NULL,
+  id BIGINT PRIMARY KEY,
   prefix    varchar(256)  NOT NULL,
   uri       varchar(2048) NOT NULL,
-  createdAt timestamp  NOT NULL DEFAULT now(),
-  PRIMARY KEY(id)
+  createdAt timestamp  NOT NULL DEFAULT now()
 );
 
 -- A table for storing metadata about the current database, e.g. version numbers for each table
 CREATE TABLE metadata (
-  id        integer       NOT NULL AUTO_INCREMENT,
+  id        integer       PRIMARY KEY AUTO_INCREMENT,
   mkey      varchar(16)   NOT NULL,
-  mvalue    varchar(256)  NOT NULL,
-  PRIMARY KEY(id)
+  mvalue    varchar(256)  NOT NULL
 );
 
 

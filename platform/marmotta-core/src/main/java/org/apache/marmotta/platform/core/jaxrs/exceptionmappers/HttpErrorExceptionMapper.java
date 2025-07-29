@@ -26,10 +26,10 @@ import org.apache.marmotta.platform.core.exception.HttpErrorException;
 import org.apache.marmotta.platform.core.jaxrs.ErrorMessage;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

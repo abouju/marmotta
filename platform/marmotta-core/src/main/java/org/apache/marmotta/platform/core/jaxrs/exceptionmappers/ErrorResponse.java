@@ -17,7 +17,7 @@
 
 package org.apache.marmotta.platform.core.jaxrs.exceptionmappers;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.PrintWriter;

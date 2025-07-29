@@ -38,7 +38,7 @@ import org.openrdf.model.impl.ValueFactoryImpl;
 public class LDP {
 
     /** {@code http://www.w3.org/ns/ldp#} **/
-    public static final String NAMESPACE = "http://www.w3.org/ns/ldp#";
+    public static final String NAMESPACE = "https://www.w3.org/ns/ldp#";
 
     /** {@code ldp} **/
     public static final String PREFIX = "ldp";

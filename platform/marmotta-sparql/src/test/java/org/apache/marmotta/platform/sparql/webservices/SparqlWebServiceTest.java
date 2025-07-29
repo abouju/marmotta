@@ -17,7 +17,7 @@
 
 package org.apache.marmotta.platform.sparql.webservices;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.apache.marmotta.platform.core.api.importer.ImportService;
 import org.apache.marmotta.platform.core.api.triplestore.ContextService;
 import org.apache.marmotta.platform.core.api.user.UserService;
@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 
-import static com.jayway.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.expect;
 
 /**
  * Tests for testing the SPAQL endpoint
@@ -108,7 +108,7 @@ public class SparqlWebServiceTest {
         expect().
                 log().ifError().
                 statusCode(200).
-                contentType("application/rdf+xml").
+                contentType("application/ld+json").//rdf+xml
             given().
                 param("query", "CONSTRUCT { <http://www.wikier.org/foaf#wikier> ?p ?o } WHERE { <http://www.wikier.org/foaf#wikier> ?p ?o }").
             when().
@@ -158,7 +158,7 @@ public class SparqlWebServiceTest {
         expect().
                 log().ifError().
                 statusCode(200).
-                contentType("application/rdf+xml").
+                contentType("application/ld+json").//rdf+xml	
             given().
                 param("query", "DESCRIBE <http://www.wikier.org/foaf#wikier>").
             when().

@@ -30,7 +30,7 @@ import org.openrdf.model.Resource;
 import org.openrdf.sail.NotifyingSail;
 import org.openrdf.sail.helpers.NotifyingSailWrapper;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.HashSet;
 import java.util.Set;
 

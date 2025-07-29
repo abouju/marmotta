@@ -23,7 +23,7 @@ import org.apache.marmotta.platform.core.model.logging.LoggingOutput;
 import org.apache.marmotta.platform.core.model.logging.SyslogOutput;
 import org.slf4j.Logger;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import java.util.List;
 
 /**

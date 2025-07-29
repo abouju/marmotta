@@ -22,10 +22,10 @@ import org.apache.marmotta.commons.http.MarmottaHttpUtils;
 import org.apache.marmotta.platform.versioning.api.VersionSerializerService;
 import org.apache.marmotta.platform.versioning.io.VersionSerializer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.util.List;
 

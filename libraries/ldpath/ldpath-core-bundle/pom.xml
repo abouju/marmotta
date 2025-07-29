@@ -80,13 +80,166 @@
           <artifactId>ldpath-functions-json</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <dependency>
+    <groupId>jakarta.xml.bind</groupId>
+    <artifactId>jakarta.xml.bind-api</artifactId>
+    <version>3.0.1</version> </dependency>
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+    <version>3.0.2</version> <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>jakarta.activation</groupId>
+    <artifactId>jakarta.activation-api</artifactId>
+    <version>2.0.1</version> </dependency>
+    <dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>txw2</artifactId>
+    <version>3.0.2</version> <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>3.0.2</version> <scope>runtime</scope>
+</dependency>
+<dependency>
+        <groupId>org.jdom</groupId>
+        <artifactId>jdom2</artifactId>
+        <version>2.0.6</version> </dependency>
     </dependencies>
 
 
 
     <build>
         <plugins>
-            <plugin>
+<plugin>
+    <groupId>org.apache.felix</groupId>
+    <artifactId>maven-bundle-plugin</artifactId>
+    <version>6.0.0</version>
+    <extensions>true</extensions>
+    <configuration>
+        <instructions>
+            <Bundle-SymbolicName>ldpath-core-bundle</Bundle-SymbolicName>
+            <Bundle-Name>LDPath Bundle</Bundle-Name>
+            <Bundle-Version>${project.version}</Bundle-Version>
+            <Build-Jdk-Spec>${maven.compiler.target}</Build-Jdk-Spec>
+            <Bundle-Category>Apache Marmotta</Bundle-Category>
+            <Bundle-Description>OSGI bundle for LDPath Core. This embeds all functions to allow loading of those via the Java ServiceLoader.</Bundle-Description>
+            <Bundle-DocURL>http://marmotta.apache.org</Bundle-DocURL>
+            <Bundle-License>http://www.apache.org/licenses/LICENSE-2.0.txt</Bundle-License>
+
+            <Embed-Dependency>
+                ldpath-core,
+                ldpath-functions-collections,
+                ldpath-functions-date,
+                ldpath-functions-html,
+                ldpath-functions-math,
+                ldpath-functions-text,
+                ldpath-functions-xml,
+                ldpath-functions-json,
+                ldpath-api,
+                jakarta.xml.bind-api,
+                jaxb-runtime,
+                jakarta.activation-api,
+                txw2,
+                jaxb-core,
+                jdom2
+            </Embed-Dependency>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Embed-Directory>WEB-INF/lib</Embed-Directory>
+
+            <Export-Contents>
+                org.apache.marmotta.ldpath.*;version="${project.version}",
+                !org.apache.marmotta.ldpath.test.*, !org.apache.marmotta.ldpath.parser.antlr.*, !org.apache.marmotta.ldpath.parser.lang.*, org.apache.marmotta.ldpath.api;version="${project.version}",
+                org.apache.marmotta.ldpath.exception;version="${project.version}",
+                org.apache.marmotta.ldpath.util;version="${project.version}",
+                org.apache.marmotta.ldpath.vocabulary.*;version="${project.version}",
+
+                !org.jdom2.*,
+                !jakarta.xml.bind.*,
+                !jakarta.activation.*,
+                !com.sun.xml.txw2.*,
+                !org.glassfish.jaxb.*,
+                !junit.*,
+                !org.hamcrest.*,
+                !javax.servlet.*,
+                !com.google.common.*
+            </Export-Contents>
+
+            <Export-Package>
+                </Export-Package>
+
+
+            <Import-Package>
+                org.slf4j;version="[1.6,2)",
+                javax.xml.datatype;resolution:=optional,
+                javax.xml.namespace;resolution:=optional,
+                javax.xml.parsers;resolution:=optional,
+                javax.xml.stream;resolution:=optional,
+                javax.xml.stream.events;resolution:=optional,
+                javax.xml.stream.util;resolution:=optional,
+                javax.xml.transform;resolution:=optional,
+                javax.xml.transform.dom;resolution:=optional,
+                javax.xml.transform.sax;resolution:=optional,
+                javax.xml.transform.stream;resolution:=optional,
+                javax.xml.validation;resolution:=optional,
+                javax.xml.xpath;resolution:=optional,
+                org.w3c.dom;resolution:=optional,
+                org.xml.sax;resolution:=optional,
+                org.xml.sax.ext;resolution:=optional,
+                org.xml.sax.helpers;resolution:=optional,
+                javax.imageio;resolution:=optional,
+                javax.imageio.stream;resolution:=optional,
+                javax.lang.model;resolution:=optional,
+                java.awt;resolution:=optional,
+                java.awt.image;resolution:=optional,
+                java.beans;resolution:=optional,
+                com.sun.xml.fastinfoset.sax;resolution:=optional,
+                com.sun.xml.fastinfoset.stax;resolution:=optional,
+                org.jvnet.fastinfoset;resolution:=optional,
+                org.jvnet.fastinfoset.stax;resolution:=optional,
+                org.jvnet.staxex;resolution:=optional,
+                com.sun.activation.registries;resolution:=optional;version="[2.0.1,3)",
+                com.sun.istack;resolution:=optional;version="[4.0.1,5)",
+                org.glassfish.hk2.osgiresourcelocator;resolution:=optional,
+                java.io,
+                java.lang,
+                java.lang.annotation,
+                java.lang.invoke,
+                java.lang.ref,
+                java.lang.reflect,
+                java.math,
+                java.net,
+                java.nio.charset,
+                java.security,
+                java.text,
+                java.util,
+                java.util.concurrent,
+                java.util.concurrent.atomic,
+                java.util.concurrent.locks,
+                java.util.logging,
+                java.util.regex,
+                org.apache.commons.lang3;version="[3.4.0,4)",
+                org.jsoup;resolution:=optional;version="[1.14.3,2)",
+                org.jsoup.nodes;resolution:=optional;version="[1.14.3,2)",
+                org.jsoup.safety;resolution:=optional;version="[1.14.3,2)",
+                org.jsoup.select;resolution:=optional;version="[1.14.3,2)",
+                com.jayway.jsonpath;resolution:=optional;version="[0.9.1,1)",
+                com.google.common.base;version="[31.1.0,32)",
+                com.google.common.collect;version="[31.1.0,32)",
+                java.nio.file,
+                java.nio.file.attribute,
+                java.util.function,
+                ch.qos.logback.classic;resolution:=optional
+            </Import-Package>
+
+            <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=17))"</Require-Capability>
+        </instructions>
+    </configuration>
+</plugin>
+
+            <!--<plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
@@ -95,13 +248,7 @@
                         <Bundle-Category>Apache Marmotta LDPath</Bundle-Category>
                         <Bundle-DocURL>http://wiki.apache.org/marmotta/LDPath</Bundle-DocURL>
                         <_versionpolicy>$${version;===;${@}}</_versionpolicy>
-                        <!-- 
-                          NOTES: 
-                            * jdom2 is required for using the ldpath-functions-xml
-                            * jsoup is required for using the ldpath-functions-html
-                            * jsonpath is required for using the ldpath-functions-json
-                          -->
-                        <Import-Package>
+                         <Import-Package>
                           org.slf4j.*;version="[1.6,2)",
                           ch.qos.logback.classic;resolution:=optional,
                           org.jdom2.*;resolution:=optional,
@@ -125,7 +272,8 @@
                         </Embed-Dependency>
                     </instructions>
                 </configuration>
-            </plugin>
+            </plugin>-->
+            
         </plugins>
     </build>
 

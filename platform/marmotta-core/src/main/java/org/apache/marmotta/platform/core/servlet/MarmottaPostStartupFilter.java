@@ -22,15 +22,15 @@ import org.apache.marmotta.platform.core.events.SystemStartupEvent;
 import org.apache.marmotta.platform.core.model.module.ModuleConfiguration;
 import org.slf4j.Logger;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import java.io.IOException;
 
 /**

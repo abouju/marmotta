@@ -56,7 +56,7 @@ public class TripleTableTest {
         Statement stmt7 = new StatementImpl(subject2,predicate2,object1);
         Statement stmt8 = new StatementImpl(subject2,predicate2,object2);
 
-        TripleTable<Statement> table = new TripleTable<>();
+        TripleTable<org.openrdf.model.Statement> table = new TripleTable<>();
         table.add(stmt1);
         table.add(stmt2);
         table.add(stmt3);
@@ -102,7 +102,7 @@ public class TripleTableTest {
         Statement stmt7 = new StatementImpl(subject2,predicate2,object1);
         Statement stmt8 = new StatementImpl(subject2,predicate2,object2);
 
-        TripleTable<Statement> table = new TripleTable<>();
+        TripleTable<org.openrdf.model.Statement> table = new TripleTable<>();
         table.add(stmt1);
         table.add(stmt2);
         table.add(stmt3);

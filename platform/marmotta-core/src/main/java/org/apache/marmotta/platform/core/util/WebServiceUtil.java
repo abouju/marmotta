@@ -20,7 +20,7 @@ package org.apache.marmotta.platform.core.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;

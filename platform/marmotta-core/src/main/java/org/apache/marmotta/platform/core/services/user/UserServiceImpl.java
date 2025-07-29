@@ -33,12 +33,12 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -96,11 +96,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public  void createDefaultUsers() {
         lock.lock();
+
         try  {
             if (!userExists(ANONYMOUS_LOGIN)) {
+
+
                 log.debug("Initializing anonymous user.");
                 try {
+
+
                     anonUser = createUser(ANONYMOUS_LOGIN);
+
+
                 } catch(UserExistsException e) {
                     log.debug("Anonymous user already exists.");
                 }

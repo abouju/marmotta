@@ -17,7 +17,7 @@
  */
 package org.apache.marmotta.platform.core.jaxrs.interceptors;
 
-import javax.ws.rs.ext.WriterInterceptor;
+import jakarta.ws.rs.ext.WriterInterceptor;
 
 /**
  * A marker-interface to allow CDI injection of Interceptors implementing this interface by the InterceptorService.

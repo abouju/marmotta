@@ -17,14 +17,14 @@
  */
 package ${package}.webservices;
 
-import static com.jayway.restassured.RestAssured.expect;
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.config.DecoderConfig;
-import com.jayway.restassured.config.RestAssuredConfig;
-import com.jayway.restassured.http.ContentType;
+import io.restassured.RestAssured;
+import io.restassured.config.DecoderConfig;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.http.ContentType;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -62,7 +62,7 @@ public class MyWebServiceTest {
         RestAssured.given()
                 .param("name", "Steve")
             .expect()
-                .content(containsString("Hello Steve"))
+                .body(containsString("Hello Steve"))
             .when()
                 .get("/${moduleKey}");
 
@@ -81,7 +81,7 @@ public class MyWebServiceTest {
                 .param("name", "Jürgen")
             .expect()
                 .contentType(ContentType.TEXT)
-                .content(containsString("Hello Jürgen"))
+                .body(containsString("Hello Jürgen"))
             .when()
                 .get("/${moduleKey}");
 

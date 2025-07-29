@@ -29,6 +29,7 @@ import org.apache.marmotta.kiwi.persistence.registry.LocalTripleRegistry;
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import org.openrdf.model.*;
+import org.openrdf.model.Resource;
 import org.openrdf.model.impl.ContextStatementImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

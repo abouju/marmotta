@@ -37,9 +37,9 @@ import org.openrdf.sail.NotifyingSail;
 import org.openrdf.sail.Sail;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 /**
  * A store implementation providing an instance of a KiWi triple store as backend for the Marmotta platform. Uses the

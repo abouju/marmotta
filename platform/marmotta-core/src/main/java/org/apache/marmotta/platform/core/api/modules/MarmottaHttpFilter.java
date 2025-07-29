@@ -17,7 +17,7 @@
  */
 package org.apache.marmotta.platform.core.api.modules;
 
-import javax.servlet.Filter;
+import jakarta.servlet.Filter;
 
 /**
  * Add file description here!

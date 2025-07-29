@@ -61,18 +61,23 @@ public class LiteralCommonsTest {
         // the different methods
         String value1 = RandomStringUtils.random(128);
         Literal literal1 = vf.createLiteral(value1);
+        String datatype0 = Namespaces.NS_XSD + "string";
+        URI uri0 = vf.createURI(datatype0);
 
-        Assert.assertEquals(LiteralCommons.createCacheKey(value1,(String)null,(String)null),LiteralCommons.createCacheKey(literal1));
-        Assert.assertEquals(LiteralCommons.createCacheKey(value1,null,(URI)null),LiteralCommons.createCacheKey(literal1));
+        Assert.assertEquals(LiteralCommons.createCacheKey(value1,(String)null,(String)null/*datatype0 2.8.0*/),LiteralCommons.createCacheKey(literal1));
+        Assert.assertEquals(LiteralCommons.createCacheKey(value1,null,(URI)null	/*uri0 2.8.0*/),LiteralCommons.createCacheKey(literal1));
 
         // create a string literal with language and without datatype and test if the hash key is correct between
         // the different methods
         String value2 = RandomStringUtils.random(128);
         Locale locale2 = Locale.getDefault();
+        String datatype2 = Namespaces.NS_RDF + "langString";
+        URI uri2 = vf.createURI(datatype2);
+
         Literal literal2 = vf.createLiteral(value2,locale2.getLanguage().toLowerCase());
 
-        Assert.assertEquals(LiteralCommons.createCacheKey(value2,locale2,(String)null),LiteralCommons.createCacheKey(literal2));
-        Assert.assertEquals(LiteralCommons.createCacheKey(value2,locale2,(URI)null),LiteralCommons.createCacheKey(literal2));
+        Assert.assertEquals(LiteralCommons.createCacheKey(value2,locale2,(String)null/*datatype2 2.8.0 */),LiteralCommons.createCacheKey(literal2));
+        Assert.assertEquals(LiteralCommons.createCacheKey(value2,locale2,(URI)null/*uri2 2.8.0*/	),LiteralCommons.createCacheKey(literal2));
 
         // create a string literal with datatype and without language and test if the hash key is correct between
         // the different methods

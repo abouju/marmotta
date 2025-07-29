@@ -25,9 +25,13 @@ import org.openrdf.rio.Rio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import java.util.*;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  * User: Thomas Kurz

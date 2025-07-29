@@ -32,10 +32,10 @@ import org.openrdf.model.URI;
 import org.openrdf.repository.RepositoryException;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 

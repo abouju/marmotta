@@ -17,9 +17,9 @@
 
 package org.apache.marmotta.platform.core.jaxrs.exceptionmappers;
 
-import javax.enterprise.context.Dependent;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
+import jakarta.enterprise.context.Dependent;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 
 /**
  * Map MarmottaExceptions to a internal server error and return the default error object

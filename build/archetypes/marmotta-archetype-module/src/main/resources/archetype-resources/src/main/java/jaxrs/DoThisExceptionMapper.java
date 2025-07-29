@@ -19,9 +19,9 @@ package ${package}.jaxrs;
 
 import org.apache.marmotta.platform.core.jaxrs.exceptionmappers.CDIExceptionMapper;
 
-import javax.enterprise.context.Dependent;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
+import jakarta.enterprise.context.Dependent;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 
 import ${package}.exceptions.DoThisException;
 

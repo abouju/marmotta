@@ -36,14 +36,22 @@ import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.Response.Status;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.OPTIONS;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.ResponseBuilder;
+import jakarta.ws.rs.core.Response.Status;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
@@ -52,7 +60,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.net.HttpHeaders.*;
-import static javax.ws.rs.core.Response.status;
+import static jakarta.ws.rs.core.Response.status;
 import static org.apache.marmotta.platform.core.model.config.CoreOptions.*;
 import static org.apache.marmotta.platform.core.webservices.resource.ResourceWebServiceHelper.appendMetaTypes;
 
@@ -281,7 +289,7 @@ public class ResourceWebService {
      */
     @GET
     @Path(UUID_PATTERN)
-    public Response getLocal(@PathParam("uuid") String uuid, @HeaderParam(javax.ws.rs.core.HttpHeaders.ACCEPT) String types) throws UnsupportedEncodingException, HttpErrorException {
+    public Response getLocal(@PathParam("uuid") String uuid, @HeaderParam(jakarta.ws.rs.core.HttpHeaders.ACCEPT) String types) throws UnsupportedEncodingException, HttpErrorException {
         String uri = configurationService.getBaseUri() + "resource/" + uuid;
         try {
             return get(uri, types);

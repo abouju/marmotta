@@ -17,7 +17,7 @@
 
 package org.apache.marmotta.platform.core.jaxrs.exceptionmappers;
 
-import javax.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.ExceptionMapper;
 
 /**
  * A marker-interface to allow CDI injection of ExceptionMappers implementing this interface by the ExceptionMapperService.

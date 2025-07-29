@@ -61,4 +61,17 @@
         <module>marmotta-archetype-module</module>
         <module>marmotta-archetype-webapp</module>
     </modules>
+		    
+            <dependencies>
+    
+               <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            
+        </dependencies>
+
+            
 </project>

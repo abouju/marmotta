@@ -40,6 +40,7 @@ RUN apt-get update \
 		default-jdk \
 		maven \
 		wget \
+        libtomcat9-java \
     || apt-get install -y -f
 
 # build

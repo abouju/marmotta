@@ -17,8 +17,8 @@
  */
 package org.apache.marmotta.platform.core.webservices.resource;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.Path;
 
 import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 

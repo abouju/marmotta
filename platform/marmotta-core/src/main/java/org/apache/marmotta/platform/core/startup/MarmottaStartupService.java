@@ -32,12 +32,12 @@ import org.apache.marmotta.platform.core.util.CDIContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,6 +117,7 @@ public class MarmottaStartupService {
             } else {
                 log.info("Apache Marmotta Core (Development Version) starting up ... ");
             }
+ 
 
             //TODO: refactor this code
             if(StringUtils.isBlank(home)) {
@@ -160,6 +161,7 @@ public class MarmottaStartupService {
                 }
             }
 
+
             if(StringUtils.isNotBlank(home)) {
                 if (home.startsWith("~" + File.separator)) {
                     home = System.getProperty("user.home") + home.substring(1);
@@ -197,6 +199,7 @@ public class MarmottaStartupService {
             }
 
             configurationStarted = true;
+
         } finally {
             lock.unlock();
         }

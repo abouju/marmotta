@@ -20,7 +20,7 @@ import ch.qos.logback.classic.Level;
 import com.google.common.collect.ImmutableSet;
 import org.apache.marmotta.platform.core.logging.BaseLoggingModule;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 
 /**

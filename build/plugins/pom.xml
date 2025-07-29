@@ -55,13 +55,9 @@
 
             </plugin>
             <plugin>
-                <!-- Maven is Java5 -->
+                <!-- Maven is Java -->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId><!--
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>-->
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
                 <!-- No need for the buildinfo plugin here -->

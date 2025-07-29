@@ -74,7 +74,7 @@ public class MarmottaInitialContext extends MarmottaContext {
 
 
     private void registerBeanManager(Context ctx_java) throws NamingException {
-        ctx_java.bind("BeanManager", new Reference("javax.enterprise.inject.spi.BeanManager", "org.jboss.weld.resources.ManagerObjectFactory", null));
+        ctx_java.bind("BeanManager", new Reference("jakarta.enterprise.inject.spi.BeanManager", "org.jboss.weld.resources.ManagerObjectFactory", null));
     }
 
 

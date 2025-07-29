@@ -25,9 +25,9 @@ import org.apache.marmotta.platform.core.exception.TemplatingException;
 import org.apache.marmotta.platform.core.model.template.MenuItem;
 import org.apache.marmotta.platform.core.model.template.MenuItemType;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletContext;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;

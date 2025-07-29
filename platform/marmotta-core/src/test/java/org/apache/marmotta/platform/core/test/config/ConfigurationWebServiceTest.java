@@ -17,8 +17,8 @@
  */
 package org.apache.marmotta.platform.core.test.config;
 
-import static com.jayway.restassured.RestAssured.expect;
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
@@ -34,7 +34,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 
 /**
  * Add file description here!
@@ -70,7 +70,7 @@ public class ConfigurationWebServiceTest {
         // set my.key to the values "value1" and "value2"
         given().
         header("Content-Type","application/json").
-        content(mapper.writeValueAsString(Lists.newArrayList("value1", "value2"))).
+        body(mapper.writeValueAsString(Lists.newArrayList("value1", "value2"))).
         expect().
         statusCode(200).
         when().

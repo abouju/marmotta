@@ -39,13 +39,13 @@ import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailException;
 import org.slf4j.Logger;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.UnsatisfiedResolutionException;
-import javax.inject.Inject;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.UnsatisfiedResolutionException;
+import jakarta.inject.Inject;
 
 /**
  * Offers access to the Sesame repository underlying this Apache Marmotta instance. The activation/deactivation methods

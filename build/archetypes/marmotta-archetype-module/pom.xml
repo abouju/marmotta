@@ -123,6 +123,7 @@
     </build>
 
     <dependencies>
+    	
         <!-- These dependencies are only to ensure the correct build order -->
         <dependency>
             <groupId>org.apache.marmotta</groupId>

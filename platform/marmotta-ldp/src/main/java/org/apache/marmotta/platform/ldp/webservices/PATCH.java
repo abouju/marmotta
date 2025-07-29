@@ -17,7 +17,7 @@
  */
 package org.apache.marmotta.platform.ldp.webservices;
 
-import javax.ws.rs.HttpMethod;
+import jakarta.ws.rs.HttpMethod;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

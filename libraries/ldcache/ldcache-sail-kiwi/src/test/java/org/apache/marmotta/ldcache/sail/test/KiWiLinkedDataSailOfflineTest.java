@@ -72,7 +72,7 @@ import static org.hamcrest.Matchers.hasToString;
  *     </li>
  *     <li>H2:
  *     <ul>
- *         <li>h2.url, e.g. jdbc:h2:mem;MVCC=true;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10</li>
+ *         <li>h2.url, e.g. jdbc:h2:mem;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10</li>
  *         <li>h2.user (default: lmf)</li>
  *         <li>h2.pass (default: lmf</li>
  *     </ul>

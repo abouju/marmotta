@@ -18,10 +18,11 @@
     limitations under the License.
 
 -->
-<web-app version="3.0"
-         xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="6.0"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
 
     <!-- enable custom JNDI implementation -->
     <listener>
@@ -114,6 +115,17 @@
         <filter-name>MarmottaH2ConsoleFilter</filter-name>
         <url-pattern>/database/*</url-pattern>
     </filter-mapping>
+     <!--<servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>jakarta.ws.rs.Application</param-name>
+            <param-value>org.apache.marmotta.platform.core.webservices.CoreApplication</param-value>
+        </init-param>
+    </servlet>-->	
+    
 	<servlet>
 		<servlet-name>H2Console</servlet-name>
 		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
@@ -146,7 +158,7 @@
         <filter-name>MarmottaWebservices</filter-name>
         <filter-class>org.jboss.resteasy.plugins.server.servlet.FilterDispatcher</filter-class>
         <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
+            <param-name>jakarta.ws.rs.Application</param-name>
             <param-value>org.apache.marmotta.platform.core.webservices.CoreApplication</param-value>
         </init-param>
     </filter>

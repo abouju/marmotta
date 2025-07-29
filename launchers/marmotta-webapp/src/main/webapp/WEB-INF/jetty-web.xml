@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Licensed to the Apache Software Foundation (ASF) under one
@@ -17,8 +18,8 @@
     limitations under the License.
 
 -->
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN"
-   "http://www.eclipse.org/jetty/configure.dtd">
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
+
 
 <Configure id="webAppCtx" class="org.eclipse.jetty.webapp.WebAppContext">
 
@@ -37,6 +38,6 @@
     </Array>
 
    <Call class="org.jboss.weld.environment.jetty.EclipseWeldServletHandler" name="process">
-      <Arg><Ref id="webAppCtx"/></Arg>
+      <!-- <Arg><Ref id="webAppCtx"/></Arg>  -->
    </Call>
 </Configure>

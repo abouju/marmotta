@@ -195,7 +195,7 @@ public abstract class BaseClusterTest {
         public KiWiConfiguration buildBaseConfiguration() {
             return new KiWiConfiguration(
                     "default-H2",
-                    "jdbc:h2:mem:kiwitest;MVCC=true;DB_CLOSE_ON_EXIT=TRUE;DB_CLOSE_DELAY=-1",
+                    "jdbc:h2:mem:kiwitest;DB_CLOSE_ON_EXIT=TRUE;DB_CLOSE_DELAY=-1",
                     "kiwi", "kiwi",
                     new H2Dialect());
         }

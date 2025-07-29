@@ -33,15 +33,15 @@ import org.apache.marmotta.platform.core.util.FallbackConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -374,9 +374,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
         if (!config.getBoolean("kiwi.setup.database")) {
             log.info("SETUP: Setting up initial Apache Marmotta database configuration ...");
             String db_type = config.getString("database.type", "h2");
-            config.setProperty("database.h2.url", "jdbc:h2:" + getHome() + "/db/marmotta;MVCC=true;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
+            config.setProperty("database.h2.url", "jdbc:h2:" + getHome() + "/db/marmotta;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
             if (db_type.equals("h2")) {
-                config.setProperty("database.url", "jdbc:h2:" + getHome() + "/db/marmotta;MVCC=true;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
+                config.setProperty("database.url", "jdbc:h2:" + getHome() + "/db/marmotta;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
                 config.setProperty("database.user", "sa");
                 config.setProperty("database.password", "sa");
             }

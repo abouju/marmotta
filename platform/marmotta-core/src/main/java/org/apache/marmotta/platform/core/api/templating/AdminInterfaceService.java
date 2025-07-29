@@ -19,7 +19,7 @@ package org.apache.marmotta.platform.core.api.templating;
 
 import org.apache.marmotta.platform.core.exception.TemplatingException;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 /**
  * User: Thomas Kurz

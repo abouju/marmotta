@@ -52,13 +52,26 @@ public class MarmottaContextFactory implements InitialContextFactory {
 
     @Override
     public Context getInitialContext(Hashtable<?, ?> hashtable) throws NamingException {
+    Hashtable<Object, Object> env = new Hashtable<>();
+    env.put("jndi.syntax.direction", "left_to_right");
+    env.put("jndi.syntax.separator","/");
 
-        Hashtable<Object,Object> env = new Hashtable<>();
-        env.put("jndi.syntax.direction", "left_to_right");
-        env.put("jndi.syntax.separator","/");
+    for (java.util.Map.Entry<?, ?> entry : hashtable.entrySet()) {
+        // Journalise le type de la clé et de la valeur
+        log.info("JNDI: Property key type: {}, value type: {}",
+                 entry.getKey() != null ? entry.getKey().getClass().getName() : "null",
+                 entry.getValue() != null ? entry.getValue().getClass().getName() : "null");
 
-        env.putAll(hashtable);
+        if (entry.getKey() instanceof String && entry.getValue() instanceof String) {
+            env.put((Object) entry.getKey(), (Object) entry.getValue());
+        } else {
+            log.warn("JNDI: Ignoring non-String property: {} = {}", entry.getKey(), entry.getValue());
+        }
+    }
 
-        return MarmottaInitialContext.getInstance(env);
+       
+
+        return MarmottaInitialContext.getInstance(env); 
+
     }
 }

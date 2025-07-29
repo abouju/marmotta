@@ -37,7 +37,7 @@ import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.*;
 import org.slf4j.Logger;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;

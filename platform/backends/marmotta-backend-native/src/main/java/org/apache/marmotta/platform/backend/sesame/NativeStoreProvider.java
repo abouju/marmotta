@@ -25,8 +25,8 @@ import org.openrdf.sail.Sail;
 import org.openrdf.sail.nativerdf.NativeStore;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.io.File;
 
 /**

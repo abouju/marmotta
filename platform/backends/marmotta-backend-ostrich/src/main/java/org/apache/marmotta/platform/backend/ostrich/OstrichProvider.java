@@ -25,8 +25,8 @@ import org.openrdf.sail.NotifyingSail;
 import org.openrdf.sail.Sail;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 /**
  * A store implementation using a Sesame NativeStore as backend for Marmotta. The triples are stored in the

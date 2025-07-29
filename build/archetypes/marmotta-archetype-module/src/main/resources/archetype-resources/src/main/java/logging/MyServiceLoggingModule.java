@@ -20,7 +20,7 @@ package ${package}.logging;
 import ch.qos.logback.classic.Level;
 import org.apache.marmotta.platform.core.logging.BaseLoggingModule;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 import java.util.Collections;
 

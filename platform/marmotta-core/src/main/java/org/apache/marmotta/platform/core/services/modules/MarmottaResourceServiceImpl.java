@@ -28,10 +28,10 @@ import org.apache.marmotta.platform.core.qualifiers.cache.MarmottaCache;
 import org.apache.tika.Tika;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;

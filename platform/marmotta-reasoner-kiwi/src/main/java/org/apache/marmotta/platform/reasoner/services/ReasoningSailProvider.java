@@ -22,9 +22,9 @@ import info.aduna.iteration.CloseableIteration;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 import org.apache.marmotta.commons.sesame.transactions.api.TransactionalSail;
 import org.apache.marmotta.commons.sesame.transactions.wrapper.TransactionalSailWrapper;

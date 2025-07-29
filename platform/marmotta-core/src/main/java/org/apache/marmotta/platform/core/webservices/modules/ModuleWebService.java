@@ -21,11 +21,11 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.marmotta.platform.core.api.modules.ModuleService;
 import org.apache.marmotta.platform.core.model.module.ModuleConfiguration;
 
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Collection;

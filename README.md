@@ -140,8 +140,8 @@ Read more about [our release process](https://wiki.apache.org/marmotta/ReleasePr
 
 The goal of this fork is to have triplestore for geosparql.
 
-This version is working with a debian 11, openjdk version "11.0.12", postgresql-13, jdbc postgresql 42.3.1
-It was tested with a war and apache-tomcat-8.5.47
+This version is working with 
+It was tested with a war and apache-tomcat-10.1.19
 
 maven-plugin-annotations 
 3.2 -> 3.3

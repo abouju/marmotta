@@ -48,13 +48,13 @@ import org.apache.marmotta.platform.core.model.logging.SyslogOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 import java.io.File;
 import java.text.Collator;
 import java.util.*;
@@ -282,7 +282,7 @@ public class LoggingServiceImpl implements LoggingService {
     /**
      * Provide a logger to the injection point given as argument.
      * 
-     * @see org.apache.marmotta.platform.core.api.logging.LoggingService#createLogger(javax.enterprise.inject.spi.InjectionPoint)
+     * @see org.apache.marmotta.platform.core.api.logging.LoggingService#createLogger(jakarta.enterprise.inject.spi.InjectionPoint)
      */
     @Override
     @Produces

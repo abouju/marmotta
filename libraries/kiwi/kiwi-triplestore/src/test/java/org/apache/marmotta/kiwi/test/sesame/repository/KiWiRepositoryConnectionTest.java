@@ -43,7 +43,7 @@ public class KiWiRepositoryConnectionTest extends RepositoryConnectionTest {
     /* (non-Javadoc)
      * @see org.openrdf.repository.RepositoryConnectionTest#createRepository()
      */
-    @Override
+    //@Override
     protected Repository createRepository() throws Exception {
         config.setDefaultContext(null);
         KiWiStore store = new KiWiStore(config);
@@ -59,13 +59,13 @@ public class KiWiRepositoryConnectionTest extends RepositoryConnectionTest {
 
     @Ignore("KiWi supports transaction isolation")
     @Test
-    @Override
+    //@Override
     public void testReadOfAddedStatement1() throws Exception {
     }
 
     @Ignore("KiWi supports transaction isolation")
     @Test
-    @Override
+    //@Override
     public void testReadOfAddedStatement2() throws Exception {
     }
 

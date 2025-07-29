@@ -34,8 +34,9 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.ServletException;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.*;
@@ -129,7 +130,9 @@ public class JettyMarmotta extends AbstractMarmotta {
 
         // if a single web service is given, only register that webservice, otherwise startup the default configuration
         //FilterHolder restEasyFilter = new FilterHolder(org.jboss.resteasy.plugins.server.servlet.FilterDispatcher.class);
-        ServletHolder restEasyFilter = new ServletHolder(org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.class);
+        //ServletHolder restEasyFilter = new ServletHolder(org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.class);
+        	
+        ServletHolder restEasyFilter = new ServletHolder((Class<? extends Servlet>) org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.class);
         restEasyFilter.setInitParameter("resteasy.injector.factory", TestInjectorFactory.class.getCanonicalName());
 
         if (webservices != null) {

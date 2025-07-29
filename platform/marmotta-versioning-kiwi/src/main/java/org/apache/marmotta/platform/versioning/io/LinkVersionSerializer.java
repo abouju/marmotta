@@ -24,8 +24,8 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.apache.marmotta.commons.http.ContentType;
 import org.apache.marmotta.kiwi.versioning.model.Version;

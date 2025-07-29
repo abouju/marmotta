@@ -18,22 +18,34 @@
     limitations under the License.
 
 -->
-<web-app version="3.0"
-         xmlns="http://java.sun.com/xml/ns/javaee"
+<web-app version="6.0"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+                             
+        <resource-env-ref>
+        <resource-env-ref-name>BeanManager</resource-env-ref-name>
+        <resource-env-ref-type>jakarta.enterprise.inject.spi.BeanManager</resource-env-ref-type>
+    </resource-env-ref>
 
+    <!-- enable CDI / Weld for dependency injection -->
+    <!--
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.EnhancedListener</listener-class>
+    </listener> -->
+    <listener>
+       <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+    
     <!-- enable custom JNDI implementation -->
+    
     <listener>
         <listener-class>org.apache.marmotta.platform.core.jndi.MarmottaJndiListener</listener-class>
     </listener>
 
-    <!-- enable CDI / Weld for dependency injection -->
-    <listener>
-       <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-    </listener>
-
     <!-- Initialise the KiWi system -->
+    
     <listener>
         <listener-class>org.apache.marmotta.platform.core.servlet.MarmottaPreStartupListener</listener-class>
     </listener>
@@ -67,10 +79,6 @@
         <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
 
         <init-param>
-            <param-name>cors.allowOrigin</param-name>
-            <param-value>*</param-value>
-        </init-param>
-        <init-param>
             <param-name>cors.supportedMethods</param-name>
             <param-value>GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS</param-value>
         </init-param>
@@ -78,7 +86,6 @@
             <param-name>cors.exposedHeaders</param-name>
             <param-value>Location, Link, ETag, Accept-Post, Accept-Patch</param-value>
         </init-param>
-
     </filter>
     <filter-mapping>
         <filter-name>CORS</filter-name>
@@ -119,9 +126,20 @@
         <filter-name>MarmottaH2ConsoleFilter</filter-name>
         <url-pattern>/database/*</url-pattern>
     </filter-mapping>
+     <servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>jakarta.ws.rs.Application</param-name>
+            <param-value>org.apache.marmotta.platform.core.webservices.CoreApplication</param-value>
+        </init-param>
+    </servlet>
+    
 	<servlet>
 		<servlet-name>H2Console</servlet-name>
-		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
+		<servlet-class>org.h2.server.web.JakartaWebServlet</servlet-class>
 		<init-param> <param-name>webAllowOthers</param-name> <param-value>true</param-value> </init-param>
 		<!--	<init-param> <param-name>trace</param-name> <param-value></param-value> </init-param> -->
 		<load-on-startup>1</load-on-startup>
@@ -149,11 +167,9 @@
 
     <filter>
         <filter-name>MarmottaWebservices</filter-name>
-        <filter-class>
-            org.jboss.resteasy.plugins.server.servlet.FilterDispatcher
-        </filter-class>
+        <filter-class>org.jboss.resteasy.plugins.server.servlet.FilterDispatcher</filter-class>
         <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
+            <param-name>jakarta.ws.rs.Application</param-name>
             <param-value>org.apache.marmotta.platform.core.webservices.CoreApplication</param-value>
         </init-param>
     </filter>

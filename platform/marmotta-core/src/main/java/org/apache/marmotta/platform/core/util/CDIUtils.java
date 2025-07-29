@@ -17,8 +17,8 @@
  */
 package org.apache.marmotta.platform.core.util;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Named;
 import java.lang.annotation.Annotation;
 
 /**

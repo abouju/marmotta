@@ -27,10 +27,10 @@ import org.apache.marmotta.platform.reasoner.services.ReasoningSailProvider;
 import org.openrdf.sail.SailException;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import java.util.*;
 
 /**

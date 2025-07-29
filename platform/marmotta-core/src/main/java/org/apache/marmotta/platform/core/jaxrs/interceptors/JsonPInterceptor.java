@@ -19,8 +19,8 @@ package org.apache.marmotta.platform.core.jaxrs.interceptors;
 
 import org.jboss.resteasy.plugins.providers.jackson.Jackson2JsonpInterceptor;
 
-import javax.enterprise.context.Dependent;
-import javax.ws.rs.ext.Provider;
+import jakarta.enterprise.context.Dependent;
+import jakarta.ws.rs.ext.Provider;
 
 /**
  * <p>

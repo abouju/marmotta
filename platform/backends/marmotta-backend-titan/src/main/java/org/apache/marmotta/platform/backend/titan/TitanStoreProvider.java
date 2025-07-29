@@ -31,9 +31,9 @@ import org.openrdf.sail.NotifyingSail;
 import org.openrdf.sail.Sail;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import java.util.List;
 /**
  * A store provider implementation for Apache Marmotta providing instances of Titan.

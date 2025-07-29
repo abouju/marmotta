@@ -22,9 +22,9 @@ import java.net.URISyntaxException;
 import org.apache.marmotta.platform.core.api.prefix.PrefixProvider;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Inject;
 
 /**
  * Prefix manager supporting prefix.cc as eager external provider

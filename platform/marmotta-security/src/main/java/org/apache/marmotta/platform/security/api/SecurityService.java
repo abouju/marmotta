@@ -19,7 +19,7 @@ package org.apache.marmotta.platform.security.api;
 
 import org.apache.marmotta.platform.security.model.SecurityConstraint;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

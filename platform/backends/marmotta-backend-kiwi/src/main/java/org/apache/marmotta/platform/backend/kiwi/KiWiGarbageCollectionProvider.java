@@ -22,7 +22,7 @@ import org.apache.marmotta.platform.core.api.triplestore.GarbageCollectionProvid
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailException;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Add file description here!

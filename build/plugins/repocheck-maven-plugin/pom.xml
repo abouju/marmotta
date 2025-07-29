@@ -65,12 +65,20 @@
 
     <build>
         <plugins>            
-            <plugin>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <configuration>
-                    <goalPrefix>repocheck</goalPrefix>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <version>3.13.1</version> <configuration>
                 </configuration>
-            </plugin>
+            <executions>
+                <execution>
+                    <id>default-descriptor</id>
+                    <goals>
+                        <goal>descriptor</goal>
+                    </goals>
+                    <phase>process-classes</phase> </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 

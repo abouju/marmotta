@@ -17,14 +17,14 @@
  */
 package org.apache.marmotta.platform.core.test.modules;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.apache.marmotta.platform.core.api.modules.MarmottaResourceService;
 import org.apache.marmotta.platform.core.api.modules.ResourceEntry;
 import org.apache.marmotta.platform.core.test.base.JettyMarmotta;
 import org.apache.marmotta.platform.core.webservices.prefix.PrefixWebService;
 import org.junit.*;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 
 /**
  * Marmotta Resources test

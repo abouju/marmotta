@@ -34,12 +34,18 @@ import org.apache.marmotta.platform.core.model.logging.LogFileOutput;
 import org.apache.marmotta.platform.core.model.logging.LoggingOutput;
 import org.apache.marmotta.platform.core.model.logging.SyslogOutput;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +136,7 @@ public class LoggingWebService {
         ObjectMapper mapper = new ObjectMapper();
         try {
             //log.info(getContentData(request.getReader()));
-            List<Map<String,Object>> values = mapper.readValue(request.getInputStream(), new TypeReference<ArrayList<HashMap<String,Object>>>(){});
+            List<HashMap<String, Object>> values = mapper.readValue(request.getInputStream(), new TypeReference<ArrayList<HashMap<String,Object>>>(){});
 
             for(Map<String,Object> module : values) {
                 if(module.get("id") != null) {
@@ -240,7 +246,7 @@ public class LoggingWebService {
         ObjectMapper mapper = new ObjectMapper();
         try {
             //log.info(getContentData(request.getReader()));
-            List<Map<String,Object>> values = mapper.readValue(request.getInputStream(), new TypeReference<ArrayList<HashMap<String,Object>>>(){});
+            List<HashMap<String, Object>> values = mapper.readValue(request.getInputStream(), new TypeReference<ArrayList<HashMap<String,Object>>>(){});
 
             boolean updated = false;
             for(Map<String,Object> module : values) {

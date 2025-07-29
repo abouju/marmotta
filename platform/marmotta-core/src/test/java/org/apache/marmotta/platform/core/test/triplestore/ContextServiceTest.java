@@ -19,7 +19,7 @@ package org.apache.marmotta.platform.core.test.triplestore;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 import org.apache.marmotta.platform.core.api.importer.ImportService;
 import org.apache.marmotta.platform.core.api.triplestore.ContextService;

@@ -17,7 +17,6 @@
  */
 package org.apache.marmotta.platform.core.services.prefix;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.http.HttpEntity;
@@ -30,8 +29,8 @@ import org.apache.marmotta.platform.core.api.prefix.PrefixProvider;
 import org.apache.marmotta.platform.core.util.http.HttpRequestUtil;
 import org.slf4j.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -141,6 +140,7 @@ public class PrefixCC implements PrefixProvider {
                 }
             });
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("Error trying to retrieve prefic.cc reverse lookup for namespace '{}': {}", namespace, e.getMessage());
             return null;
         }

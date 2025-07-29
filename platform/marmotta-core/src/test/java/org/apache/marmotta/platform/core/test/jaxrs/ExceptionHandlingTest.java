@@ -16,8 +16,8 @@
  */
 package org.apache.marmotta.platform.core.test.jaxrs;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.ResponseBody;
+import io.restassured.RestAssured;
+import io.restassured.response.ResponseBody;
 import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 import org.apache.marmotta.platform.core.exception.MarmottaException;
 import org.apache.marmotta.platform.core.test.base.JettyMarmotta;
@@ -31,7 +31,7 @@ import org.openrdf.rio.RDFParseException;
 
 import java.io.IOException;
 
-import static com.jayway.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.expect;
 
 /**
  * Test for exceptions handling

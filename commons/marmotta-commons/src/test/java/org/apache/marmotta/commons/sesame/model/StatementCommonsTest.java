@@ -62,7 +62,7 @@ public class StatementCommonsTest {
 
     @Test
     public void testTripleEquivalence() {
-        Equivalence<Statement> e = StatementCommons.tripleEquivalence();
+        Equivalence<org.openrdf.model.Statement> e = StatementCommons.tripleEquivalence();
 
         Assert.assertTrue(e.equivalent(stmt1,stmt2));
         Assert.assertTrue(e.equivalent(stmt1,stmt4));

@@ -80,7 +80,7 @@ public abstract class AbstractMarmotta {
 
         // create a temporary configuration with an in-memory database URL for H2
         override = new MapConfiguration(new HashMap<String,Object>());
-        override.setProperty("database.h2.url","jdbc:h2:mem;MVCC=true;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
+        override.setProperty("database.h2.url","jdbc:h2:mem;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=10");
         override.setProperty("logging.template", "/logback-testing.xml");
         override.setProperty("testing.enabled", true);
 

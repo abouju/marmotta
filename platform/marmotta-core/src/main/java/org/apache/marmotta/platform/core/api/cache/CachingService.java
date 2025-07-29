@@ -17,7 +17,7 @@
  */
 package org.apache.marmotta.platform.core.api.cache;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 

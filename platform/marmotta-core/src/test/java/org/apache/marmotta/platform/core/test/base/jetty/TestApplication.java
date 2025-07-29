@@ -17,7 +17,7 @@
  */
 package org.apache.marmotta.platform.core.test.base.jetty;
 
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.core.Application;
 import java.util.Set;
 
 /**

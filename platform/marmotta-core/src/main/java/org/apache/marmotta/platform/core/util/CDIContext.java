@@ -20,16 +20,17 @@ package org.apache.marmotta.platform.core.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Qualifier;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Qualifier;
 import javax.naming.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Marmotta CDI Context Util
@@ -61,27 +62,46 @@ public class CDIContext {
 
 
     private static BeanManager lookupBeanManager() {
-        for (String location : beanManagerLocations) {
-            try {
-                return (BeanManager) new InitialContext().lookup(location);
-            } catch (NameNotFoundException e) {
-                // do nothing: it is ok to throw an exception here because we will look anyways in other locations and
-                // throw an exception at the end of the method
-            } catch (NamingException e) {
-                log.error(
-                        "naming exception for path {}; this probably means that JNDI is not set up properly (see e.g. http://code.google.com/p/lmf/wiki/InstallationSetup#Specific_Settings_for_Tomcat )",
-                        location, e);
-            }
-        }
-        // in case no JNDI resource for the bean manager is found, display the JNDI context for debugging
+    System.out.println("-----------------------> lookupBeanManager "+beanManager);
+
+    // TRY JNDI LOOKUP FIRST (as Marmotta designed it)
+    for (String location : beanManagerLocations) {
         try {
-            log.info("Could not find BeanManager in {}; list of JNDI context follows", beanManagerLocations);
-            showJndiContext(new InitialContext(),"java:", "");
+            System.out.println("-----------------------> location "+location);
+            InitialContext initialContext = new InitialContext();
+            Object tmpObject = initialContext.lookup(location);
+            System.out.println("-----------------------> Object "+tmpObject);
+            BeanManager tmpBeanManager = (BeanManager)tmpObject;
+            return tmpBeanManager/*(BeanManager) new InitialContext().lookup(location)*/;
+        } catch (NameNotFoundException e) {
+            System.out.println("-----------------------> not found location "+location);
         } catch (NamingException e) {
-            log.error("error listing JNDI context",e);
+            log.error(
+                    "naming exception for path {}; this probably means that JNDI is not set up properly (see e.g. http://code.google.com/p/lmf/wiki/InstallationSetup#Specific_Settings_for_Tomcat )",
+                    location, e);
+            // Do NOT rethrow yet, try next method
         }
-        throw new IllegalArgumentException("Could not find BeanManager in " + beanManagerLocations);
     }
+
+    // IF JNDI FAILS, TRY CDI.current() (STANDARD CDI 2.0+ API)
+    try {
+        // This requires Jakarta CDI API (jakarta.enterprise.inject.spi.CDI)
+        // Make sure your build includes a dependency like 'jakarta.enterprise.cdi-api'
+        return jakarta.enterprise.inject.spi.CDI.current().getBeanManager();
+    } catch (Exception e) {
+        log.error("Could not find BeanManager via CDI.current()", e);
+    }
+
+
+    // in case no JNDI resource for the bean manager is found, display the JNDI context for debugging
+    try {
+        log.info("Could not find BeanManager in {}; list of JNDI context follows", beanManagerLocations);
+        showJndiContext(new InitialContext(),"java:", "");
+    } catch (NamingException e) {
+        log.error("error listing JNDI context",e);
+    }
+    throw new IllegalArgumentException("Could not find BeanManager in " + beanManagerLocations + " or via CDI.current()");
+}
 
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> type) {

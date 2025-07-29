@@ -39,7 +39,7 @@ public abstract class AbstractFacadingTest {
         repositoryRDF = new SailRepository(
                 new KiWiStore(new KiWiConfiguration(
                         "kiwiTest",
-                        "jdbc:h2:mem:facading;MVCC=true;DB_CLOSE_ON_EXIT=TRUE;DB_CLOSE_DELAY=10",
+                        "jdbc:h2:mem:facading;DB_CLOSE_ON_EXIT=TRUE;DB_CLOSE_DELAY=10",
                         "", "", new H2Dialect(),
                         "http://example.com/ctx/default", "http://example.com/ctx/inferred")));
         repositoryRDF.initialize();

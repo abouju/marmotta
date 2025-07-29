@@ -28,7 +28,7 @@ import java.util.*;
  */
 public class MarmottaContext implements Context {
 
-    private Hashtable<Object, Object>      environment;
+    private Hashtable<Object, Object> environment;
 
     private HashMap<Name,Object> bindings;
 
@@ -66,9 +66,9 @@ public class MarmottaContext implements Context {
      *
      * @param name the name of the object to look up
      * @return the object bound to <tt>name</tt>
-     * @throws javax.naming.NamingException if a naming exception is encountered
+     * @throws jakarta.naming.NamingException if a naming exception is encountered
      * @see #lookup(String)
-     * @see #lookupLink(javax.naming.Name)
+     * @see #lookupLink(jakarta.naming.Name)
      */
     @Override
     public Object lookup(Name name) throws NamingException {
@@ -130,7 +130,7 @@ public class MarmottaContext implements Context {
      * @throws javax.naming.directory.InvalidAttributesException if object did not supply all mandatory attributes
      * @throws javax.naming.NamingException if a naming exception is encountered
      * @see #bind(String, Object)
-     * @see #rebind(javax.naming.Name, Object)
+     * @see #rebind(jakarta.naming.Name, Object)
      * @see javax.naming.directory.DirContext#bind(javax.naming.Name, Object,
      *      javax.naming.directory.Attributes)
      */

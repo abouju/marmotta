@@ -18,7 +18,8 @@
 package org.apache.marmotta.platform.core.test.ld;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.marmotta.platform.core.api.triplestore.ContextService;
@@ -45,8 +46,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Random;
 
-import static com.jayway.restassured.RestAssured.expect;
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.given;
 
 /**
  * This test verifies the functionality of the Linked Data endpoint

@@ -26,9 +26,9 @@ import org.apache.marmotta.platform.ldcache.api.endpoint.LinkedDataEndpointServi
 import org.openrdf.model.URI;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.*;
 
 /**

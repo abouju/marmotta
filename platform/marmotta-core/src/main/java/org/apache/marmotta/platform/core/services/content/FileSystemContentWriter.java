@@ -28,12 +28,17 @@ import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.slf4j.Logger;
-import sun.net.www.MimeEntry;
-import sun.net.www.MimeTable;
+import org.apache.tika.mime.MediaType;
+import org.apache.tika.mime.MimeType;
+import org.apache.tika.mime.MimeTypeException;
+import org.apache.tika.mime.MimeTypes;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+//import sun.net.www.MimeEntry;
+//import sun.net.www.MimeTable;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.io.*;
 import java.net.URI;
 import java.util.UUID;
@@ -155,7 +160,7 @@ public class FileSystemContentWriter implements ContentWriter {
      * @param in       a InputStream containing the content of the resource
      */
     @Override
-    public void setContentStream(Resource resource, InputStream in, String mimetype) throws IOException {
+    public void setContentStream(Resource resource, InputStream in, String mimetype) throws IOException{
         try {
             RepositoryConnection conn = sesameService.getConnection();
             try {
@@ -174,10 +179,21 @@ public class FileSystemContentWriter implements ContentWriter {
                         // we store all other resources in the default directory; create a random file name and store it in the hasContentLocation
                         // property
                         String extension = null;
-                        MimeEntry entry = MimeTable.getDefaultTable().find(mimetype);
-                        if(entry != null && entry.getExtensions().length > 0) {
-                            extension = entry.getExtensions()[0];
-                        }
+                        MimeTypes mimeTypes = MimeTypes.getDefaultMimeTypes();
+            		MediaType mediaType = MediaType.parse(mimetype);
+            		try {
+           		MimeType mimeType = mimeTypes.forName(mediaType.toString());
+
+           		extension = mimeType.getExtension();
+           		           		}
+           		  catch(MimeTypeException ex) {
+           		          log.debug("FileSystem Content Writer type mime trouble: {})",mediaType);
+           		          extension="";
+           		  }          		
+                        //MimeEntry entry = MimeTable.getDefaultTable().find(mimetype);
+                        //if(entry != null && entry.getExtensions().length > 0) {
+                        //    extension = entry.getExtensions()[0];
+                        //}
 
                         String fileName = UUID.randomUUID().toString();
                         path = defaultDir + File.separator +

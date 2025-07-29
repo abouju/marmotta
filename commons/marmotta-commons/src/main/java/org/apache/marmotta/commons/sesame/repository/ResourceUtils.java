@@ -336,7 +336,7 @@ public class ResourceUtils {
                 public Iterator<URI> iterator() {
                     Iterator<URI> result = Iterators.transform(
                             Iterators.filter(
-                                    listResources(con).iterator(),
+                                    listResources(con).iterator(), /*input -> (input instanceof URI && input.stringValue().startsWith(prefix))*/
                                     
                                     new Predicate<Resource>() {
                                         @Override

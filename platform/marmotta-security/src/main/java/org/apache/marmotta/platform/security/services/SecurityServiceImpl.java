@@ -27,13 +27,13 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
-import sun.net.util.IPAddressUtil;
+//import sun.net.util.IPAddressUtil;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -191,7 +191,7 @@ public class SecurityServiceImpl implements SecurityService {
                         log.warn("could not parse host specification '{}': {}",host,e.getMessage());
                     }
 
-                } else if (IPAddressUtil.isIPv6LiteralAddress(host)) {
+                } else /*if (IPAddressUtil.isIPv6LiteralAddress(host)) {
                     // IPv6 address
                     try {
                         hostPatterns.add(SubnetInfo.getSubnetInfo(host));
@@ -200,7 +200,7 @@ public class SecurityServiceImpl implements SecurityService {
                     }
 
 
-                } else {
+                } else*/ {
                     log.warn("invalid host name specification: {}; please use either CIDR u.v.w.x/zz notation or the keyword LOCAL", host);
                 }
             } catch(IllegalArgumentException ex) {

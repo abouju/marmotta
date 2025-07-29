@@ -206,49 +206,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>2.6</version>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <excludeTransitive>false</excludeTransitive>
-                                    <excludeArtifactIds>izpack-standalone-compiler,marmotta-webapp</excludeArtifactIds>
-                                    <outputDirectory>${stagingDir}/lib/extra</outputDirectory>
-                                    <includeScope>runtime</includeScope>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>unpack</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>org.apache.marmotta</groupId>
-                                            <artifactId>marmotta-webapp</artifactId>
-                                            <version>${project.version}</version>
-                                            <type>war</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${stagingDir}/webapp</outputDirectory>
-                                            <excludes>**/*.jar</excludes>
-                                        </artifactItem>
-                                    </artifactItems>
-                                    <excludes>**/*.jar</excludes>
-                                    <outputDirectory>${stagingDir}/webapp</outputDirectory>
-                                    <overWriteReleases>true</overWriteReleases>
-                                    <overWriteSnapshots>true</overWriteSnapshots>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
+
                     <plugin>
                         <groupId>com.googlecode.maven-download-plugin</groupId>
                         <artifactId>download-maven-plugin</artifactId>
@@ -267,50 +225,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
-                        <executions>
-                            <execution>
-                                <id>create-empty-directories</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <tasks>
-                                        <mkdir dir="${stagingDir}/refpacks" />
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>izpack</id>
-                                <phase>package</phase>
-                                <configuration>
-                                    <target>
-                                        <taskdef name="IzPack" classname="com.izforge.izpack.ant.IzPackTask" classpathref="maven.plugin.classpath" />
-                                        <IzPack input="${stagingDir}/standalone.xml" output="${project.build.directory}/${project.artifactId}-${project.version}.jar" installerType="standard" basedir="${stagingDir}" IzPackDir="${stagingDir}/" />
-                                    </target>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.ant</groupId>
-                                <artifactId>ant</artifactId>
-                                <version>1.8.3</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.codehaus.izpack</groupId>
-                                <artifactId>izpack-standalone-compiler</artifactId>
-                                <version>${izpackVersion}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>

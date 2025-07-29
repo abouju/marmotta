@@ -25,9 +25,9 @@ import org.openrdf.model.Value;
 import org.openrdf.model.impl.LiteralImpl;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
