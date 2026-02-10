@@ -48,11 +48,11 @@ public class MarmottaPreStartupListener implements ServletContextListener {
      */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
+	
         if(startupService == null) {
             startupService = CDIContext.getInstance(MarmottaStartupService.class);
         }
-
+	
         // we check for the presence of the configuration.override init parameter; if it exists, we load this
         // configuration file and pass it as configuration override to the startup
         PropertiesConfiguration override = null;
@@ -66,6 +66,7 @@ public class MarmottaPreStartupListener implements ServletContextListener {
         }
 
         startupService.startupConfiguration(null, override, sce.getServletContext());
+        
 
     }
 

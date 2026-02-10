@@ -15,7 +15,7 @@
 
 CREATE TABLE nodes (
   id        BIGINT       PRIMARY KEY, 
-  ntype     char(8)    NOT NULL,
+  ntype     varchar(8)    NOT NULL,
   svalue    varchar(1000000000) NOT NULL,
   dvalue    double precision,
   ivalue    bigint,

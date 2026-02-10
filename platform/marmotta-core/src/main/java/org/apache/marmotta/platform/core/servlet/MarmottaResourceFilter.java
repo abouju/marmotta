@@ -23,6 +23,7 @@ import org.apache.marmotta.platform.core.api.modules.ModuleService;
 import org.jboss.resteasy.spi.BadRequestException;
 import org.slf4j.Logger;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
@@ -34,6 +35,8 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.inject.Singleton;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
@@ -52,6 +55,7 @@ import java.util.List;
  * <p/>
  * User: sschaffe
  */
+@ApplicationScoped
 public class MarmottaResourceFilter implements Filter {
 
     @Inject

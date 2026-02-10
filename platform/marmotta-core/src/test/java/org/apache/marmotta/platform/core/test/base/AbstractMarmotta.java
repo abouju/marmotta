@@ -34,6 +34,7 @@ import javax.naming.spi.NamingManager;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import jakarta.enterprise.inject.spi.CDI;
 
 /**
  * Abstract Marmotta
@@ -89,7 +90,7 @@ public abstract class AbstractMarmotta {
     }
 
     public <T> T getService(Class<T> serviceClass) {
-        return container.instance().select(serviceClass).get();
+    	return CDI.current().select(serviceClass).get();
     }
 
     public void shutdown() {

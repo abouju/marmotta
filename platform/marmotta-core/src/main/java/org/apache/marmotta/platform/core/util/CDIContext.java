@@ -24,6 +24,11 @@ import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Qualifier;
+
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.enterprise.inject.Instance;
+import org.jboss.weld.environment.se.WeldContainer;
+
 import javax.naming.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -67,12 +72,11 @@ public class CDIContext {
     // TRY JNDI LOOKUP FIRST (as Marmotta designed it)
     for (String location : beanManagerLocations) {
         try {
-            System.out.println("-----------------------> location "+location);
+
             InitialContext initialContext = new InitialContext();
             Object tmpObject = initialContext.lookup(location);
-            System.out.println("-----------------------> Object "+tmpObject);
             BeanManager tmpBeanManager = (BeanManager)tmpObject;
-            return tmpBeanManager/*(BeanManager) new InitialContext().lookup(location)*/;
+            return tmpBeanManager;
         } catch (NameNotFoundException e) {
             System.out.println("-----------------------> not found location "+location);
         } catch (NamingException e) {
@@ -102,7 +106,37 @@ public class CDIContext {
     }
     throw new IllegalArgumentException("Could not find BeanManager in " + beanManagerLocations + " or via CDI.current()");
 }
+    
+    public static <T> T getInstance(Class<T> serviceClass) {
+        if (serviceClass == null) {
+            throw new IllegalArgumentException("serviceClass must not be null");
+        }
 
+        try {
+            // Utiliser l'API CDI moderne (Jakarta EE 10)
+            // Ceci est la meilleure approche
+            Instance<T> instance = CDI.current().select(serviceClass);
+
+            if (instance.isUnsatisfied()) {
+                throw new IllegalStateException("Le bean CDI de type " + serviceClass.getName() + " n'a pas été trouvé. Vérifiez que la classe est un bean CDI (@Singleton, @ApplicationScoped, etc.) et que le beans.xml est correct.");
+            }
+
+            return instance.get();
+
+        } catch (Exception ex) {
+            // Fallback pour les environnements de test plus anciens
+            // Note: Ceci est une solution de dernier recours, il est préférable d'utiliser l'approche ci-dessus.
+            WeldContainer container = WeldContainer.current();
+            if (container != null) {
+                Instance<T> instance = container.select(serviceClass);
+                if (!instance.isUnsatisfied()) {
+                    return instance.get();
+                }
+            }
+            throw new IllegalStateException("Impossible d'obtenir l'instance du bean CDI pour la classe : " + serviceClass.getName(), ex);
+        }
+    }
+/*
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> type) {
         BeanManager beanManager = getBeanManager();

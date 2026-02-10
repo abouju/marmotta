@@ -1030,7 +1030,7 @@ public class KiWiConnection implements AutoCloseable {
             KiWiGeometryLiteral geoLiteral = (KiWiGeometryLiteral) node;
 
             String gvalue = "";
-	    String contentUpper = geoLiteral.getContent().toUpperCase​();
+	    String contentUpper = geoLiteral.getContent().toUpperCase();
 
             if (contentUpper.contains("MULTIPOINT")) {
                 gvalue = geoLiteral.getContent().substring(contentUpper.indexOf("MULTIPOINT"));
@@ -2097,6 +2097,7 @@ public class KiWiConnection implements AutoCloseable {
         requireJDBCConnection();
 
         PreparedStatement statement = statementCache.get(key);
+
         if (statement == null || statement.isClosed()) {
             statement = connection.prepareStatement(dialect.getStatement(key), ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             statementCache.put(key,statement);

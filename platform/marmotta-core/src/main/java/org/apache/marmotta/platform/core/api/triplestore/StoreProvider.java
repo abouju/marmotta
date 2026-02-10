@@ -26,6 +26,7 @@ import org.openrdf.sail.Sail;
  *
  * @author Sebastian Schaffert (sschaffert@apache.org)
  */
+
 public interface StoreProvider extends SailProvider {
 
 

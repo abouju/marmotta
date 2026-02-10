@@ -1351,7 +1351,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
         else if(isTomcat6())
             return "Apache Tomcat <= 6.x";
         else if(isJetty7())
-            return "Jetty 7.x";
+            return "Jetty 7.x/8.X/9.x/10.x/11.x/12.x";
         else if(isJetty6()) return "Jetty 6.x";
         else
             return "Unknown Servlet Container";
