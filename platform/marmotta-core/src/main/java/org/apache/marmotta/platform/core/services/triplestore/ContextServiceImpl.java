@@ -250,12 +250,7 @@ public class ContextServiceImpl implements ContextService {
             RepositoryConnection conn = sesameService.getConnection();
             try {
                 conn.begin();
-                checkConnectionNamespace(conn);
-                ValueFactory valueFactory = conn.getValueFactory();
-				URI ctx = valueFactory.createURI(uri);
-                if (StringUtils.isNotBlank(label)) {
-                    conn.add(ctx, RDFS.LABEL, Literals.createLiteral(valueFactory, label), ctx);
-                }
+                URI ctx = createContextInConnection(conn, uri, label);
                 return ctx;
             } finally {
                 conn.commit();
@@ -265,6 +260,36 @@ public class ContextServiceImpl implements ContextService {
             handleRepositoryException(ex,ContextServiceImpl.class);
         }
         return null;
+    }
+
+    /**
+     * Create (or return) a context using an already-open connection/transaction. This avoids
+     * opening a second connection and starting a nested transaction on the same underlying
+     * store, which can deadlock (e.g. Sesame's in-memory store uses a single exclusive lock
+     * per store, not per connection).
+     *
+     * @param conn an already-open, already-begun connection
+     * @param uri the uri of the context to create
+     * @param label optional label for the context
+     */
+    private URI createContextInConnection(RepositoryConnection conn, String uri, String label)
+            throws URISyntaxException, RepositoryException {
+        if(uri == null) {
+            return null;
+        }
+        if (!UriUtil.validate(uri)) {
+            uri = configurationService.getBaseContext() + uri;
+            if (!UriUtil.validate(uri)) {
+                throw new URISyntaxException(uri, "not valid context uri");
+            }
+        }
+        checkConnectionNamespace(conn);
+        ValueFactory valueFactory = conn.getValueFactory();
+        URI ctx = valueFactory.createURI(uri);
+        if (StringUtils.isNotBlank(label)) {
+            conn.add(ctx, RDFS.LABEL, Literals.createLiteral(valueFactory, label), ctx);
+        }
+        return ctx;
     }
 
     @Override

@@ -228,7 +228,9 @@ public class RepositoryTest {
         } finally {
             connectionRDF.close();
         }
+        
         // get another connection and check if demo data is available
+   
         RepositoryConnection connection = repository.getConnection();
 
         try {
@@ -248,6 +250,7 @@ public class RepositoryTest {
             // test if the result has the expected size
             // FIXME: MARMOTTA-39 (no xsd:string, so one resource is "missing")
             // Assert.assertEquals(31, resources.size());
+
             Assert.assertEquals(30, resources.size());
 
             // test if the result contains all resources that have been used as subject

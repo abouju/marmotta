@@ -29,7 +29,7 @@ import org.apache.marmotta.ldpath.api.backend.RDFBackend;
 import org.apache.marmotta.ldpath.api.transformers.NodeTransformer;
 import org.apache.marmotta.ldpath.model.programs.Program;
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.text.IsEqualIgnoringWhiteSpace;
+import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -74,6 +74,7 @@ public class ProgramTest {
     @Test
     public void testGetPathExpression() {
         final String result = program.getPathExpression(backend);
-        Assert.assertThat(result, IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace(expr));
+
+        Assert.assertThat(result, IsEqualCompressingWhiteSpace.equalToIgnoringWhiteSpace(expr));
     }
 }

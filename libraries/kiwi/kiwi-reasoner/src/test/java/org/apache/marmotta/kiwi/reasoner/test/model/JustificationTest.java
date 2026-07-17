@@ -60,16 +60,16 @@ public class JustificationTest {
 
         ctx_inferred = randomURI();
 
-        t1 = new KiWiTriple(s1,p1,o1, null);
-        t2 = new KiWiTriple(s1,p1,o2, null);
-        t3 = new KiWiTriple(s2,p1,o3, null);
-        t4 = new KiWiTriple(s1,p1,o1, randomURI());
+        t1 = new KiWiTriple(s1,p1,o1, null);         t1.setId(1L);
+        t2 = new KiWiTriple(s1,p1,o2, null);         t2.setId(2L);
+        t3 = new KiWiTriple(s2,p1,o3, null);         t3.setId(3L);
+        t4 = new KiWiTriple(s1,p1,o1, randomURI());  t4.setId(4L);
 
 
-        i1 = new KiWiTriple(s1,p2,o1, ctx_inferred); i1.setInferred(true);
-        i2 = new KiWiTriple(s1,p1,o2, ctx_inferred); i2.setInferred(true);
-        i3 = new KiWiTriple(s3,p1,o3, ctx_inferred); i3.setInferred(true);
-        i4 = new KiWiTriple(s1,p2,o1, ctx_inferred); i4.setInferred(true);
+        i1 = new KiWiTriple(s1,p2,o1, ctx_inferred); i1.setInferred(true); i1.setId(5L);
+        i2 = new KiWiTriple(s1,p1,o2, ctx_inferred); i2.setInferred(true); i2.setId(6L);
+        i3 = new KiWiTriple(s3,p1,o3, ctx_inferred); i3.setInferred(true); i3.setId(7L);
+        i4 = new KiWiTriple(s1,p2,o1, ctx_inferred); i4.setInferred(true); i4.setId(8L);
     }
 
     @Test

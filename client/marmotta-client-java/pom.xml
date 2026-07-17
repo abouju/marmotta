@@ -52,6 +52,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                   <configuration>
+        <argLine>
+            --add-opens java.base/java.lang=ALL-UNNAMED
+            --add-opens java.base/java.util=ALL-UNNAMED
+            --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+        </argLine>
+    </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -189,11 +196,12 @@
             <artifactId>jetty-server</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <scope>test</scope>
-        </dependency>
+ <dependency>
+			<groupId>org.eclipse.jetty.ee10</groupId>
+			<artifactId>jetty-ee10-servlet</artifactId>
+			<version>${jetty.version}</version>
+			<scope>test</scope>
+		</dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

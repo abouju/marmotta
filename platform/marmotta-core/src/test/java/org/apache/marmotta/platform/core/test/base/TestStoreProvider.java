@@ -26,8 +26,11 @@ import org.openrdf.sail.memory.MemoryStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Alternative;
+
 
 /**
  * A triple store provider for tests. Uses a Sesame in-memory store for holding triples.
@@ -36,6 +39,7 @@ import jakarta.enterprise.inject.Alternative;
  */
 @Alternative
 @Fallback
+@Priority(Interceptor.Priority.APPLICATION + 1)
 @ApplicationScoped
 public class TestStoreProvider implements StoreProvider {
 

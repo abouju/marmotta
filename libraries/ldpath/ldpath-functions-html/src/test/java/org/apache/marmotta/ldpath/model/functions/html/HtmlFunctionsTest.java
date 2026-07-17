@@ -20,7 +20,7 @@ package org.apache.marmotta.ldpath.model.functions.html;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -106,7 +106,7 @@ public class HtmlFunctionsTest extends AbstractTestBase {
         
         final Collection<Object> values = evaluateRule(String.format("fn:htmlText(foo:html) :: xsd:string"), resource);
         assertEquals(1, values.size());
-        assertThat(values, hasItem(equalToIgnoringWhiteSpace("Marmotta Marmotta, italian for \"Marmot\" Marmots are generally large ground squirrels in the genus Marmota, of which there are 15 species. Those most often referred to as marmots tend to live in mountainous areas, such as the Alps, northern Apennines, Eurasian steppes, Carpathians, Tatras, and Pyrenees in Europe and northwestern Asia; the Rocky Mountains, Black Hills, Cascades, and Sierra Nevada in North America; and the Deosai Plateau in Pakistan and Ladakh in India. The groundhog, however, is also sometimes called a marmot, while the similarly sized, but more social, prairie dog is not classified in the genus Marmota but in the related genus Cynomys. Marmots typically live in burrows (often within rockpiles, particularly in the case of the yellow-bellied marmot), and hibernate there through the winter. Most marmots are highly social and use loud whistles to communicate with one another, especially when alarmed. Marmots mainly eat greens and many types of grasses, berries, lichens, mosses, roots and flowers.")));
+        assertThat(values, hasItem(IsEqualCompressingWhiteSpace.equalToIgnoringWhiteSpace("Marmotta Marmotta, italian for \"Marmot\" Marmots are generally large ground squirrels in the genus Marmota, of which there are 15 species. Those most often referred to as marmots tend to live in mountainous areas, such as the Alps, northern Apennines, Eurasian steppes, Carpathians, Tatras, and Pyrenees in Europe and northwestern Asia; the Rocky Mountains, Black Hills, Cascades, and Sierra Nevada in North America; and the Deosai Plateau in Pakistan and Ladakh in India. The groundhog, however, is also sometimes called a marmot, while the similarly sized, but more social, prairie dog is not classified in the genus Marmota but in the related genus Cynomys. Marmots typically live in burrows (often within rockpiles, particularly in the case of the yellow-bellied marmot), and hibernate there through the winter. Most marmots are highly social and use loud whistles to communicate with one another, especially when alarmed. Marmots mainly eat greens and many types of grasses, berries, lichens, mosses, roots and flowers.")));
         
         final Collection<Object> values2 = evaluateRule(String.format("fn:htmlText(foo:simple) :: xsd:string"), resource);
         assertEquals(1, values2.size());

@@ -139,26 +139,25 @@ public class KiWiRDFSchemaRepositoryConnectionTest extends RDFSchemaRepositoryCo
         super.testExplicitFlag();
     }
 
-    @Override
+
     @Test
     @Ignore("in KiWi, inferencing is triggered on commit")
     public void testInferencerQueryDuringTransaction() throws Exception {
     }
 
-    @Override
+
     @Test
     @Ignore("in KiWi, inferencing is triggered on commit")
     public void testInferencerTransactionIsolation() throws Exception {
     }
 
 
-    @Override
     @Test
     @Ignore("in KiWi, inferencing is triggered on commit")
     public void testClear() throws Exception {
     }
 
-    @Override
+
     @Test
     @Ignore("in KiWi, inferencing is triggered on commit")
     public void testDeleteDefaultGraph() throws Exception {
@@ -170,7 +169,7 @@ public class KiWiRDFSchemaRepositoryConnectionTest extends RDFSchemaRepositoryCo
     public void testOrderByQueriesAreInterruptable() throws Exception {
     }
 
-    @Override
+
     @Test
     @Ignore("KiWi creates a separate context for inferred statements")
     public void testGetContextIDs() throws Exception {

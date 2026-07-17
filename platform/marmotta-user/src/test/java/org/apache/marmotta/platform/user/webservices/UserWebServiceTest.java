@@ -16,7 +16,7 @@
  */
 package org.apache.marmotta.platform.user.webservices;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 import org.apache.marmotta.platform.core.exception.io.MarmottaImportException;
 import org.apache.marmotta.platform.core.test.base.JettyMarmotta;
@@ -29,7 +29,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static com.jayway.restassured.RestAssured.expect;
+import static io.restassured.RestAssured.expect;
 
 /**
  * UserWebService Test

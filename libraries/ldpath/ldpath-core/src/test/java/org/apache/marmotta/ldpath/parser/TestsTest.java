@@ -25,7 +25,7 @@ import java.util.List;
 import org.apache.marmotta.ldpath.api.backend.NodeBackend;
 import org.apache.marmotta.ldpath.api.tests.NodeTest;
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.text.IsEqualIgnoringWhiteSpace;
+import org.hamcrest.text.IsEqualCompressingWhiteSpace;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -76,7 +76,7 @@ public class TestsTest {
     
     @Test
     public void testGetPathExpression() {
-        Assert.assertThat(test.getPathExpression(backend), IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace(expr));
+        Assert.assertThat(test.getPathExpression(backend), IsEqualCompressingWhiteSpace.equalToIgnoringWhiteSpace(expr));
     }
     
     @Test

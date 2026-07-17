@@ -16,7 +16,7 @@
  */
 package org.apache.marmotta.platform.user.services;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.apache.marmotta.platform.core.api.config.ConfigurationService;
 import org.apache.marmotta.platform.core.exception.io.MarmottaImportException;
 import org.apache.marmotta.platform.core.test.base.JettyMarmotta;

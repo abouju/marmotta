@@ -1,3 +1,5 @@
+/*jslint browser: true, devel: true */
+/*global $, jQuery, HTTP_Client, ConfigurationClient, ResourceClient, ContextClient, ImportClient, SparqlClient, LDPathClient, ServerError */
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
@@ -23,6 +25,7 @@
  * @param url The basic URL where Marmotta runs
  * @param opts an options object (OPTIONAL)
  */
+ 
 function MarmottaClient(url,opts) {
 
     if(url === undefined) {

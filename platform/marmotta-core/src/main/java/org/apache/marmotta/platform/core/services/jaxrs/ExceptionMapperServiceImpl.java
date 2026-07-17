@@ -57,10 +57,10 @@ public class ExceptionMapperServiceImpl implements ExceptionMapperService {
      */
     @PostConstruct
     public void initialise() {
-        if(!configurationService.getBooleanConfiguration("testing.enabled", false)) {
+        //if(!configurationService.getBooleanConfiguration("testing.enabled", false)) {
             ResteasyProviderFactory factory = ResteasyProviderFactory.getInstance();
             register(factory);
-        }
+        //}
     }
 
     public void register(ResteasyProviderFactory factory) {

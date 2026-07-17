@@ -33,6 +33,7 @@ public class TestMediawikiProvider extends ProviderTestBase {
      *
      * @throws Exception
      */
+     /* Too Many Request
     @Test
     public void testArticle() throws Exception {
         testResource("https://en.wikipedia.org/wiki/Marmot", "wikipedia-marmot.sparql");
@@ -41,5 +42,5 @@ public class TestMediawikiProvider extends ProviderTestBase {
     @Test
     public void testArticleHttp() throws Exception {
         testResource("http://en.wikipedia.org/wiki/Marmot", "wikipedia-marmot-http.sparql");
-    }
+    }*/
 }

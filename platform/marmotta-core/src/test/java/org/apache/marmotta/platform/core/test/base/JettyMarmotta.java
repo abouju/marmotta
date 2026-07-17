@@ -27,10 +27,10 @@ import org.apache.marmotta.platform.core.test.base.jetty.TestInjectorFactory;
 import org.apache.marmotta.platform.core.util.CDIContext;
 import org.apache.marmotta.platform.core.webservices.CoreApplication;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.FilterHolder;
-import org.eclipse.jetty.servlet.FilterMapping;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.ee10.servlet.FilterHolder;
+import org.eclipse.jetty.ee10.servlet.FilterMapping;
+import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
+import org.eclipse.jetty.ee10.servlet.ServletHolder;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
@@ -109,20 +109,77 @@ public class JettyMarmotta extends AbstractMarmotta {
         configurations.add(this.override);
         
         // create a new jetty & run it on port 8080
-        jetty = new Server(this.port);
+jetty = new Server(this.port);
+TestInjectorFactory.setManager(container.getBeanManager());
 
-        TestInjectorFactory.setManager(container.getBeanManager());
+// Jetty 12 : créer le handler séparément puis l'attacher
+ServletContextHandler ctx = new ServletContextHandler(this.context);
+jetty.setHandler(ctx);
 
-        ServletContextHandler ctx = new ServletContextHandler(jetty, this.context);
+// now we have a context, start up the first phase
+startupService.startupConfiguration(
+    home.getAbsolutePath(), 
+    new CompositeConfiguration(configurations), 
+    ctx.getServletContext()
+);
 
-        // now we have a context, start up the first phase of the LMF initialisation
-        startupService.startupConfiguration(home.getAbsolutePath(), new CompositeConfiguration(configurations), ctx.getServletContext());
+// register the RestEasy CDI injector factory
+ctx.setAttribute("resteasy.injector.factory", 
+    TestInjectorFactory.class.getCanonicalName());
 
-        // register the RestEasy CDI injector factory
+// register filters
+FilterHolder resourceFilter = new FilterHolder(
+    CDIContext.getInstance(MarmottaResourceFilter.class));
+resourceFilter.setInitParameter("kiwi.resourceCaching", "true");
+ctx.addFilter(resourceFilter, "/*", EnumSet.of(DispatcherType.REQUEST));
+
+// register RestEasy
+ServletHolder restEasyFilter = new ServletHolder(
+    (Class<? extends Servlet>) 
+    org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher.class);
+restEasyFilter.setInitParameter("resteasy.injector.factory", 
+    TestInjectorFactory.class.getCanonicalName());
+
+if (webservices != null) {
+    TestApplication.setTestedWebServices(webservices);
+    // Jakarta EE : "jakarta.ws.rs.Application" au lieu de "javax.ws.rs.Application"
+    restEasyFilter.setInitParameter("jakarta.ws.rs.Application", 
+        TestApplication.class.getCanonicalName());
+} else {
+    restEasyFilter.setInitParameter("jakarta.ws.rs.Application", 
+        CoreApplication.class.getCanonicalName());
+}
+ctx.addServlet(restEasyFilter, "/*");
+
+try {
+    jetty.start();
+    String url = "http://localhost:" + this.port + this.context + "/";
+    System.out.println("---------StartupService-----------------");
+    startupService.startupHost(url, url);
+} catch (Exception e) {
+    log.error("could not start up embedded jetty server", e);
+}
+    // make sure exception mappers are loaded and registered
+        ExceptionMapperServiceImpl mapperService = CDIContext.getInstance(ExceptionMapperServiceImpl.class);
+        try {
+            mapperService.register(((HttpServletDispatcher) restEasyFilter.getServlet()).getDispatcher().getProviderFactory());
+        } catch (ServletException e) {
+            log.warn("could not register exception mappers");
+        }
+
+        // make sure interceptors are loaded and registered
+        InterceptorServiceImpl interceptorService = CDIContext.getInstance(InterceptorServiceImpl.class);
+        try {
+            interceptorService.register(((HttpServletDispatcher) restEasyFilter.getServlet()).getDispatcher().getProviderFactory());
+        } catch (ServletException e) {
+            log.warn("could not register interceptors");
+        }
+/*        // register the RestEasy CDI injector factory
         ctx.setAttribute("resteasy.injector.factory", TestInjectorFactory.class.getCanonicalName());
 
         // register filters
         FilterHolder resourceFilter = new FilterHolder(CDIContext.getInstance(MarmottaResourceFilter.class));
+        //FilterHolder ressourceFilter = ctx.addFilter(CDIContext.getInstance(MarmottaResourceFilter.class), "/*", EnumSet.of(DispatcherType.REQUEST)); 
         resourceFilter.setInitParameter("kiwi.resourceCaching", "true");
         ctx.addFilter(resourceFilter, "/*", EnumSet.of(DispatcherType.REQUEST));
 
@@ -138,9 +195,9 @@ public class JettyMarmotta extends AbstractMarmotta {
         if (webservices != null) {
             TestApplication.setTestedWebServices(webservices);
             //restEasyFilter.setInitParameter("resteasy.resources", webservice.getName());
-            restEasyFilter.setInitParameter("javax.ws.rs.Application", TestApplication.class.getCanonicalName());
+            restEasyFilter.setInitParameter("jakarta.ws.rs.Application", TestApplication.class.getCanonicalName());
         } else {
-            restEasyFilter.setInitParameter("javax.ws.rs.Application", CoreApplication.class.getCanonicalName());
+            restEasyFilter.setInitParameter("jakarta.ws.rs.Application", CoreApplication.class.getCanonicalName());
         }
 
         //ctx.addFilter(restEasyFilter,"/*", Handler.ALL);
@@ -168,10 +225,24 @@ public class JettyMarmotta extends AbstractMarmotta {
             interceptorService.register(((HttpServletDispatcher) restEasyFilter.getServlet()).getDispatcher().getProviderFactory());
         } catch (ServletException e) {
             log.warn("could not register interceptors");
-        }
+        }*/
 
     }
-
+     @Override   
+    public void shutdown() {
+            
+    container = null;
+    try {
+        jetty.stop();
+        // Attendre que le server soit complètement arrêté
+        while (!jetty.isStopped()) {
+            Thread.sleep(100);
+        }
+    } catch (Exception e) {
+        log.error("error shutting down jetty server", e);
+    }
+}
+/*
     @Override
     public void shutdown() {
         container = null;
@@ -181,7 +252,7 @@ public class JettyMarmotta extends AbstractMarmotta {
             log.error("could not shutdown embedded jetty server", e);
         }
         super.shutdown();
-    }
+    }*/
 
     public int getPort() {
         return port;

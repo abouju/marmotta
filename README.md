@@ -140,7 +140,7 @@ Read more about [our release process](https://wiki.apache.org/marmotta/ReleasePr
 
 The goal of this fork is to have triplestore for geosparql.
 
-
+			
 It was tested with a war and apache-tomcat-11.0.18
 
 

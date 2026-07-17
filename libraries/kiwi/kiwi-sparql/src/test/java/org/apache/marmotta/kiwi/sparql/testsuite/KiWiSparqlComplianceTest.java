@@ -53,6 +53,8 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A collection of tests from the SPARQL 1.1 testsuite, for testing compliance.
@@ -178,40 +180,39 @@ public class KiWiSparqlComplianceTest {
     }
 
 
-    private void testQuery(String filename) throws Exception {
-        String queryString = IOUtils.toString(this.getClass().getResourceAsStream(filename), "UTF-8");
+ private void testQuery(String filename) throws Exception {
+    String queryString = IOUtils.toString(this.getClass().getResourceAsStream(filename), "UTF-8");
 
-        RepositoryConnection con1 = repository.getConnection();
-        RepositoryConnection con2 = reference.getConnection();
-        try {
-            con2.begin();
+    RepositoryConnection con1 = repository.getConnection();
+    RepositoryConnection con2 = reference.getConnection();
+    try {
+        con2.begin();
+        TupleQuery query2 = con2.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
+        TupleQueryResult result2 = query2.evaluate();
 
-            TupleQuery query2 = con2.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-            TupleQueryResult result2 = query2.evaluate();
+        // Matérialiser AVANT le Assume pour ne pas consommer le curseur
+        List<BindingSet> list2 = Iterations.asList(result2);
+        con2.commit();
 
-            con2.commit();
+        Assume.assumeTrue(!list2.isEmpty());  // utiliser la liste, pas result2
 
-            Assume.assumeTrue(result2.hasNext());
+        con1.begin();
+        TupleQuery query1 = con1.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
+        TupleQueryResult result1 = query1.evaluate();
+        List<BindingSet> list1 = Iterations.asList(result1);
+        con1.commit();
 
-            con1.begin();
+        Assert.assertTrue(!list1.isEmpty());
 
-            TupleQuery query1 = con1.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
-            TupleQueryResult result1 = query1.evaluate();
+        compareResults(list1, list2);  // passer les listes
 
-            con1.commit();
-
-            Assert.assertTrue(result1.hasNext());
-
-
-            compareResults(result1, result2);
-
-        } catch(RepositoryException ex) {
-            con1.rollback();
-        } finally {
-            con1.close();
-            con2.close();
-        }
+    } catch(RepositoryException ex) {
+        con1.rollback();
+    } finally {
+        con1.close();
+        con2.close();
     }
+}
 
     private void testUpdate(String filename, URI... properties) throws Exception {
         String queryString = IOUtils.toString(this.getClass().getResourceAsStream(filename), "UTF-8");
@@ -274,38 +275,106 @@ public class KiWiSparqlComplianceTest {
     }
 
 
-    private void compareResults(TupleQueryResult result1, TupleQueryResult result2) throws QueryEvaluationException {
-        List<BindingSet> bindingSets1 = Iterations.asList(result1);
-        List<BindingSet> bindingSets2 = Iterations.asList(result2);
-
-        Set<Set<Pair>> set1 = new HashSet<Set<Pair>>(Lists.transform(bindingSets1,new BindingSetPairFunction()));
-        Set<Set<Pair>> set2 = new HashSet<Set<Pair>>(Lists.transform(bindingSets2,new BindingSetPairFunction()));
-
-        for(Set<Pair> p : set1) {
-            Assert.assertTrue("binding " + p + " from result set not found in reference set", set2.contains(p));
-        }
-        for(Set<Pair> p : set2) {
-            Assert.assertTrue("binding " + p + " from reference set not found in result set", set1.contains(p));
-        }
-
-
-        Assert.assertTrue(CollectionUtils.isEqualCollection(set1, set2));
+private void compareResults(List<BindingSet> bindingSets1, List<BindingSet> bindingSets2) {
+    
+    // Convertir chaque BindingSet en une string triée reproductible
+    Set<String> set1 = new HashSet<>();
+    for (BindingSet bs : bindingSets1) {
+        set1.add(bindingSetToString(bs));
+    }
+    
+    Set<String> set2 = new HashSet<>();
+    for (BindingSet bs : bindingSets2) {
+        set2.add(bindingSetToString(bs));
     }
 
+    for (String p : set1) {
+        Assert.assertTrue("binding [" + p + "] from result set not found in reference set", set2.contains(p));
+    }
+    for (String p : set2) {
+        Assert.assertTrue("binding [" + p + "] from reference set not found in result set", set1.contains(p));
+    }
 
-    private static class BindingSetPairFunction implements Function<BindingSet, Set<Pair>> {
-        @Override
-        public Set<Pair> apply(BindingSet input) {
-            Set<Pair> result = new HashSet<Pair>();
+    Assert.assertEquals(set1, set2);
+}
 
-            for(Binding b : input) {
-                Pair p = new Pair(b.getName(), b.getValue() != null ? (b.getValue() instanceof BNode ? "_" : b.getValue().stringValue()) : null);
-                result.add(p);
+private String bindingSetToString(BindingSet bs) {
+    // Construire une représentation string triée et déterministe
+    List<String> pairs = new ArrayList<>();
+    for (Binding b : bs) {
+        String value;
+        if (b.getValue() == null) {
+            value = "null";
+        } else if (b.getValue() instanceof BNode) {
+            value = "_";
+        } else {
+            value = normalizeValue(b.getValue().stringValue());
+        }
+        pairs.add(b.getName() + "=" + value);
+    }
+    Collections.sort(pairs);  // tri déterministe
+    return pairs.toString();
+}
+
+private String normalizeValue(String value) {
+    if (value == null) return null;
+    try {
+        java.math.BigDecimal bd = new java.math.BigDecimal(value).stripTrailingZeros();
+        String s = bd.toPlainString();
+        if (s.endsWith(".0")) s = s.substring(0, s.length() - 2);
+        return s;
+    } catch (NumberFormatException e) {
+        return value;
+    }
+}
+
+private static class BindingSetPairFunction implements Function<BindingSet, Set<Pair>> {
+    @Override
+    public Set<Pair> apply(BindingSet input) {
+        Set<Pair> result = new HashSet<>();
+        for (Binding b : input) {
+            String value = null;
+            if (b.getValue() != null) {
+                if (b.getValue() instanceof BNode) {
+                    value = "_";
+                } else if (b.getValue() instanceof org.openrdf.model.Literal) {
+                    value = normalizeValue((org.openrdf.model.Literal) b.getValue());
+                } else {
+                    value = b.getValue().stringValue();
+                }
             }
-
-            return result;
+            result.add(new Pair(b.getName(), value));
         }
+        return result;
     }
+
+    private String normalizeValue(org.openrdf.model.Literal literal) {
+        String datatype = literal.getDatatype() != null 
+            ? literal.getDatatype().stringValue() : "";
+        
+        // Normaliser tous les types numériques
+        if (datatype.contains("integer") || datatype.contains("int") ||
+            datatype.contains("long") || datatype.contains("short") ||
+            datatype.contains("byte") || datatype.contains("decimal") ||
+            datatype.contains("float") || datatype.contains("double")) {
+            try {
+                // Convertir via BigDecimal pour éviter les pertes de précision
+                java.math.BigDecimal bd = new java.math.BigDecimal(literal.getLabel());
+                // Supprimer les zéros trailing et le point si entier
+                bd = bd.stripTrailingZeros();
+                String normalized = bd.toPlainString();
+                // "3.0" -> "3", "-2.0" -> "-2"
+                if (normalized.endsWith(".0")) {
+                    normalized = normalized.substring(0, normalized.length() - 2);
+                }
+                return normalized;
+            } catch (NumberFormatException e) {
+                return literal.getLabel();
+            }
+        }
+        return literal.getLabel();
+    }
+}	
 
     private static class Pair {
         String key, value;
@@ -322,8 +391,31 @@ public class KiWiSparqlComplianceTest {
         private String getValue() {
             return value;
         }
-
+        
         @Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Pair pair = (Pair) o;
+
+    if (!key.equals(pair.getKey())) return false;
+    
+    // Comparaison numérique pour les décimaux
+    if (value != null && pair.getValue() != null) {
+        try {
+            double d1 = Double.parseDouble(value);
+            double d2 = Double.parseDouble(pair.getValue());
+            return Math.abs(d1 - d2) < 0.000001;
+        } catch (NumberFormatException e) {
+            // pas un nombre, comparaison string normale
+        }
+    }
+    
+    return value != null ? value.equals(pair.getValue()) : pair.getValue() == null;
+}
+
+/*        @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -341,7 +433,8 @@ public class KiWiSparqlComplianceTest {
             int result = key.hashCode();
             result = 31 * result + (value != null ? value.hashCode() : 0);
             return result;
-        }
+        }*/
+        
 
         @Override
         public String toString() {

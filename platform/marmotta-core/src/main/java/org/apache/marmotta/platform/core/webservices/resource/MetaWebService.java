@@ -349,6 +349,13 @@ public class MetaWebService {
                 throw new HttpErrorException(Status.BAD_REQUEST, uri, "content may not be empty in resource update", ImmutableMap.of(ACCEPT, mimetype));
             }
 
+            // Resolve the default context BEFORE opening the intercepting connection.
+            // getDefaultContext() opens its own connection+transaction on the MemoryStore;
+            // calling it inside the block below (while another connection is already in a
+            // transaction on the same store and same thread) causes a self-deadlock on
+            // Sesame's per-store exclusive lock.
+            final org.openrdf.model.URI defaultContext = contextService.getDefaultContext();
+
             // a intercepting connection that filters out all triples that have
             // the wrong subject
             InterceptingRepositoryConnection connection = new InterceptingRepositoryConnectionWrapper(sesameService.getRepository(), sesameService.getConnection());
@@ -363,7 +370,7 @@ public class MetaWebService {
                 connection.remove(subject, null, null, (Resource) null);
 
                 // add RDF data from input to the suject
-                connection.add(request.getReader(), configurationService.getBaseUri(), parser, contextService.getDefaultContext());
+                connection.add(request.getReader(), configurationService.getBaseUri(), parser, defaultContext);
             } finally {
                 connection.commit();
                 connection.close();

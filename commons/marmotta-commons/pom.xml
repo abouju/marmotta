@@ -87,10 +87,11 @@
                     *
                   </Import-Package>
                   <Export-Package>
-                    javax.realtime,
-                    javolution.*,
-                    org.apache.marmotta.commons.*;version=${project.version}
-                  </Export-Package>
+javax.realtime;-split-package:=merge-first,
+        javolution.*;-split-package:=merge-first,
+        org.apache.marmotta.commons.*;version=${project.version}
+                          </Export-Package>
+                  <_splitpackage>merge-first</_splitpackage>
                 </instructions>
               </configuration>
             </plugin>
