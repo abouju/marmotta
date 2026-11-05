@@ -26,6 +26,7 @@ import org.apache.marmotta.platform.core.api.triplestore.SesameService;
 import org.apache.marmotta.platform.core.model.content.MediaContentItem;
 import org.apache.tika.detect.DefaultDetector;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.metadata.TikaCoreProperties;
 import org.openrdf.model.Resource;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
@@ -216,55 +217,55 @@ public class FileSystemContentReader implements ContentReader {
      * @param resource resource for which to return the content type
      * @return the MIME content type of the resource
      */
-    @Override
-    public String getContentType(Resource resource) {
+@Override
+public String getContentType(Resource resource) {
+    try {
+        RepositoryConnection conn = sesameService.getConnection();
         try {
-            RepositoryConnection conn = sesameService.getConnection();
-            try {
-                conn.begin();
-                MediaContentItem mci = FacadingFactory.createFacading(conn).createFacade(resource, MediaContentItem.class);
+            conn.begin();
+            MediaContentItem mci = FacadingFactory.createFacading(conn).createFacade(resource, MediaContentItem.class);
 
-                String path = mci.getContentPath();
-                if(path == null && resource instanceof org.openrdf.model.URI && resource.stringValue().startsWith("file:")) {
-                    try {
-                        URI uri = new URI(resource.stringValue());
-                        path = uri.getPath();
-                    } catch(Exception ex) {}
-                }
+            String path = mci.getContentPath();
+            if(path == null && resource instanceof org.openrdf.model.URI && resource.stringValue().startsWith("file:")) {
+                try {
+                    URI uri = new URI(resource.stringValue());
+                    path = uri.getPath();
+                } catch(Exception ex) {}
+            }
 
-                if(path != null) {
-                    File file = new File(path);
-                    if(file.exists() && file.canRead()) {
+            if(path != null) {
+                File file = new File(path);
+                if(file.exists() && file.canRead()) {
 
-                        String mimeType = null;
+                    String mimeType = null;
 
-                        Metadata metadata = new Metadata();
-                        metadata.set(Metadata.RESOURCE_NAME_KEY, file.getAbsolutePath());
-                        try {
-                            InputStream in = new BufferedInputStream(Files.asByteSource(file).openBufferedStream());
-                            mimeType = detector.detect(in,metadata).toString();
-                            in.close();
-                        } catch (IOException e) {
-                            log.error("I/O error while detecting file type for file {}",file,e);
-                        }
-                        log.debug("detected mime type {} of file {} for resource {} ...", mimeType, file, resource);
+                    Metadata metadata = new Metadata();
+                    // Adaptation Tika 2.x
+                    metadata.set(TikaCoreProperties.RESOURCE_NAME_KEY, file.getAbsolutePath());
 
-                        return mimeType;
-                    } else {
-                        return null;
+                    try (InputStream in = new BufferedInputStream(Files.asByteSource(file).openBufferedStream())) {
+                        mimeType = detector.detect(in, metadata).toString();
+                    } catch (IOException e) {
+                        log.error("I/O error while detecting file type for file {}", file, e);
                     }
+                    log.debug("detected mime type {} of file {} for resource {} ...", mimeType, file, resource);
+
+                    return mimeType;
                 } else {
                     return null;
                 }
-            } finally {
-                conn.commit();
-                conn.close();
+            } else {
+                return null;
             }
-        } catch (RepositoryException ex) {
-            handleRepositoryException(ex,FileSystemContentReader.class);
-            return null;
+        } finally {
+            conn.commit();
+            conn.close();
         }
+    } catch (RepositoryException ex) {
+        handleRepositoryException(ex, FileSystemContentReader.class);
+        return null;
     }
+}
 
 
     /**

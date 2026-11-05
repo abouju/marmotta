@@ -24,22 +24,22 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.*;
 import org.apache.maven.project.*;
+import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.RepositorySystemSession;
+import org.eclipse.aether.artifact.Artifact;
+import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.collection.CollectRequest;
+import org.eclipse.aether.collection.DependencyCollectionException;
+import org.eclipse.aether.graph.Dependency;
+import org.eclipse.aether.graph.DependencyNode;
+import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.resolution.DependencyRequest;
+import org.eclipse.aether.resolution.DependencyResolutionException;
+import org.eclipse.aether.resolution.DependencyResult;
 import org.jdom2.Element;
 import org.jdom2.Text;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.sonatype.aether.RepositorySystem;
-import org.sonatype.aether.RepositorySystemSession;
-import org.sonatype.aether.artifact.Artifact;
-import org.sonatype.aether.collection.CollectRequest;
-import org.sonatype.aether.collection.DependencyCollectionException;
-import org.sonatype.aether.graph.Dependency;
-import org.sonatype.aether.graph.DependencyNode;
-import org.sonatype.aether.repository.RemoteRepository;
-import org.sonatype.aether.resolution.DependencyRequest;
-import org.sonatype.aether.resolution.DependencyResolutionException;
-import org.sonatype.aether.resolution.DependencyResult;
-import org.sonatype.aether.util.artifact.DefaultArtifact;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -138,14 +138,7 @@ public class RefPackMojo extends AbstractMojo {
                         }
                     }
                     processModule(result.getRoot());
-                    /*
-                    deps = aether.resolve(aetherArtifact, JavaScopes.RUNTIME);
 
-                    getLog().info("Artifact: "+aetherArtifact);
-                    for(Artifact dep : deps) {
-                        getLog().info("- dependency "+dep.getFile().getAbsolutePath());
-                    }
-                    */
                 } catch (DependencyResolutionException e) {
                     getLog().warn("could not resolve dependencies for artifact "+aetherArtifact,e);
                 } catch (DependencyCollectionException e) {
@@ -165,7 +158,7 @@ public class RefPackMojo extends AbstractMojo {
      * @param currentModule
      */
     private void collectLibraryDependencies(DependencyNode node, Artifact currentModule) {
-		String groupId = node.getDependency().getArtifact().getGroupId();
+        String groupId = node.getDependency().getArtifact().getGroupId();
         String artifactId = node.getDependency().getArtifact().getArtifactId();
         if(!isPackDependency(groupId, artifactId)) {
             // first check if the current artifact is already covered by a module the current module depends on
@@ -201,9 +194,9 @@ public class RefPackMojo extends AbstractMojo {
      * @param currentModule
      */
     private void collectModuleDependencies(DependencyNode node, Artifact currentModule) {
-		String groupId = node.getDependency().getArtifact().getGroupId();
+        String groupId = node.getDependency().getArtifact().getGroupId();
         String artifactId = node.getDependency().getArtifact().getArtifactId();
-		if(isPackDependency(groupId, artifactId)) {
+        if(isPackDependency(groupId, artifactId)) {
             moduleDependencies.get(currentModule).add(node.getDependency().getArtifact());
         }
     }
@@ -231,23 +224,13 @@ public class RefPackMojo extends AbstractMojo {
                 collectLibraryDependencies(child, moduleNode.getDependency().getArtifact());
             }
 
-            // information output
-            /*
-            for(Artifact otherModule : moduleDependencies.get(moduleNode.getDependency().getArtifact())) {
-                getLog().info(" - depending on module "+otherModule.getArtifactId());
-            }
-            for(Artifact library : moduleLibraries.get(moduleNode.getDependency().getArtifact())) {
-                getLog().info(" - depending on library "+library);
-            }
-            */
-
             File destination = new File(outputDirectory, moduleNode.getDependency().getArtifact().getArtifactId() + ".xml");
             if (!destination.getParentFile().exists()) { 
-            	destination.getParentFile().mkdirs();
+                destination.getParentFile().mkdirs();
             }
-        	if (!destination.exists()) {
-        		destination.createNewFile();
-        	}
+            if (!destination.exists()) {
+                destination.createNewFile();
+            }
 
             getLog().info("writing refpack to " + destination.getAbsolutePath());
 
@@ -275,7 +258,6 @@ public class RefPackMojo extends AbstractMojo {
         packs.addContent(pack);
 
         // get the model for the artifact, we read name and description from it
-
         Model pom = getArtifactModel(module);
 
         // set name of pack from artifact
