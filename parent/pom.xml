@@ -55,9 +55,10 @@
 		<titan.version>0.5.4</titan.version>
 		<accumulograph.version>0.2.1</accumulograph.version>
 		<jax.doclets.version>0.10.1</jax.doclets.version>
-		<tomcat.version>10.0.20</tomcat.version>
+		<tomcat.version>11.0.27</tomcat.version>
 		<slf4j.version>1.7.36</slf4j.version>
-		<infinispan.version>9.1.7.Final</infinispan.version>
+		<infinispan.version>9.1.7.Final</infinispan.version><!--9.1.7.Final -->
+		<protobuf-java.version>3.0.0-beta-4</protobuf-java.version>
 	</properties>
 
 	
